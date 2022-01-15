@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "Fancy-Mouse-WEB",
   "private": true,
   "scripts": {
     "dev": "next dev",
