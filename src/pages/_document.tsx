@@ -1,5 +1,6 @@
-import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
+import Document, { Html, Main, NextScript, DocumentContext, Head } from 'next/document';
 import { extractCritical } from '@emotion/server';
+import { GlobalStyles } from 'twin.macro';
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -21,6 +22,7 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="ko-kr">
+        <GlobalStyles />
         <Head />
         <body>
           <Main />
