@@ -1,8 +1,16 @@
-import '../styles/globals.css';
-import type { AppProps } from 'next/app';
+import { FC } from 'react';
+import Head from 'next/head';
+import { GlobalStyles } from 'twin.macro';
+import { AppProps } from 'next/app';
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
-}
+const App: FC<AppProps> = ({ Component, pageProps }: AppProps) => (
+  <>
+    <Head>
+      <title>Fancy Mouse</title>
+    </Head>
+    <GlobalStyles />
+    <Component {...pageProps} />
+  </>
+);
 
-export default MyApp;
+export default App;
