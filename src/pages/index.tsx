@@ -1,12 +1,15 @@
 import type { NextPage } from 'next';
-import tw from 'twin.macro';
-
-const TestComponent = tw.span`text-blue-500 text-3xl`;
+import GNB from '@/components/navigation/GNB';
+import Layout from '@/components/layouts';
+import WordList from '@/components/words/WordList';
 
 const Home: NextPage = () => {
   return (
     <div>
-      <TestComponent>Test</TestComponent>
+      <GNB />
+      <Layout>
+        <WordList />
+      </Layout>
     </div>
   );
 };
