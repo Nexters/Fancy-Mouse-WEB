@@ -379,6 +379,13 @@ Ensure the default browser behavior of the `hidden` attribute.
 [hidden] {
   display: none;
 }
+    html,
+    body {
+        height: 100%;
+        font-size: 20px;
+        font-weight: normal;
+        font-style: normal;
+    }
 
 *, ::before, ::after {
   --tw-translate-x: 0;
@@ -424,13 +431,15 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
 }
+.static {
+  position: static;
+}
 
 html,
 body {
+    font-family: 'Spoqa Han Sans Neo', sans-serif !important;
     padding: 0;
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 a {

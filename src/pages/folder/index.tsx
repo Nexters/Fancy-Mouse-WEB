@@ -5,7 +5,7 @@ const Folder = () => {
   return (
     <div>
       <GNB />
-      <Layout>Folder</Layout>
+      <Layout>폴더</Layout>
     </div>
   );
 };
