@@ -1,31 +1,18 @@
 import React from 'react';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
+import Tabs from '@/components/navigation/Tabs';
 
-const Nav = styled('nav')`
-  background: transparent;
-  padding: 1em;
-  height: 2em;
-  display: flex;
-  align-items: center;
-`;
 const PageBody = styled('div')`
   width: 100%;
   height: 100%;
-  padding: 2em;
 `;
 
 const Layout = ({ children }) => {
+  const { pathname } = useRouter();
   return (
     <>
-      <Nav>
-        <Link href="/">
-          <a>저장한 단어</a>
-        </Link>
-        <Link href="/folder">
-          <a>폴더</a>
-        </Link>
-      </Nav>
+      <Tabs pathname={pathname} />
       <PageBody>{children}</PageBody>
     </>
   );

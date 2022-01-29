@@ -5,12 +5,12 @@ import WordList from '@/components/words/WordList';
 
 const Home: NextPage = () => {
   return (
-    <div>
+    <>
       <GNB />
       <Layout>
         <WordList />
       </Layout>
-    </div>
+    </>
   );
 };
 
