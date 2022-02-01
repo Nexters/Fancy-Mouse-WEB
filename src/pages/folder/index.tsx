@@ -1,7 +1,7 @@
 import GNB from '@/components/navigation/GNB';
 import Layout from '@/components/layouts';
 
-const Folder = () => {
+const FolderList = () => {
   return (
     <div>
       <GNB />
@@ -10,4 +10,4 @@ const Folder = () => {
   );
 };
 
-export default Folder;
+export default FolderList;
