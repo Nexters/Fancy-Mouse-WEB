@@ -2,6 +2,9 @@ import React, { useContext } from 'react';
 import styled from '@emotion/styled';
 import { ModalContext } from '@/contexts/ModalContext';
 import usePortal from '@/hooks/usePortal';
+import { MODAL_TYPE } from '@/components/modals/type';
+import FolderModal from '@/components/modals/FolderModal';
+import WordModal from '@/components/modals/WordModal';
 
 const Container = styled.div`
   position: fixed;
@@ -35,15 +38,12 @@ const Modal = () => {
     e.preventDefault();
     handleModal('');
   };
+  console.log(modalType.type);
 
   return visible ? (
     <Portal>
       <Container onClick={handleOutsideClick}>
-        <Layer>
-          <div className="bg-white relative p-5 shadow-lg rounded flex flex-col items-start text-lg text-gray-800">
-            <p>Modal</p>
-          </div>
-        </Layer>
+        <Layer>{modalType === MODAL_TYPE.WORD ? <WordModal /> : <FolderModal />}</Layer>
       </Container>
     </Portal>
   ) : null;
