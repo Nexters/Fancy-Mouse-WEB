@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import styled from '@emotion/styled';
 import { ModalContext } from '@/contexts/ModalContext';
 import usePortal from '@/hooks/usePortal';
-import { MODAL_TYPE } from '@/components/modals/type';
+import { MODAL_TYPE, ModalType } from '@/components/modals/type';
 import FolderModal from '@/components/modals/FolderModal';
 import WordModal from '@/components/modals/WordModal';
 
@@ -30,20 +30,30 @@ const Layer = styled.div`
   transform: translate(-50%, -50%);
 `;
 
+const ModalFactory = (modalType: ModalType) => {
+  switch (modalType) {
+    case MODAL_TYPE.FOLDER:
+      return <FolderModal />;
+    case MODAL_TYPE.WORD:
+      return <WordModal />;
+    default:
+      return null;
+  }
+};
+
 const Modal = () => {
   const { handleModal, visible, modalType } = useContext(ModalContext);
   const { Portal } = usePortal();
 
   const handleOutsideClick = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    handleModal('');
+    handleModal();
   };
-  console.log(modalType.type);
 
   return visible ? (
     <Portal>
       <Container onClick={handleOutsideClick}>
-        <Layer>{modalType === MODAL_TYPE.WORD ? <WordModal /> : <FolderModal />}</Layer>
+        <Layer>{ModalFactory(modalType)}</Layer>
       </Container>
     </Portal>
   ) : null;

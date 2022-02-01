@@ -5,7 +5,7 @@ import { ModalType } from '@/components/modals/type';
 
 interface ModalContextProps {
   modalType: ModalType | undefined;
-  handleModal: (modalType: ModalType) => void;
+  handleModal: (modalType?: ModalType) => void;
   visible: boolean;
 }
 

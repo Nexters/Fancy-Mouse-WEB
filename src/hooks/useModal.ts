@@ -5,7 +5,7 @@ const useModal = () => {
   const [visible, setVisible] = useState(false);
   const [modalType, setModalType] = useState<ModalType | undefined>(MODAL_TYPE.WORD);
 
-  const handleModal = (type: ModalType) => {
+  const handleModal = (type?: ModalType) => {
     setVisible(!visible);
     setModalType(type);
   };
