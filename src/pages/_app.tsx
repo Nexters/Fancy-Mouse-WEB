@@ -5,6 +5,7 @@ import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import '../styles/globals.css';
 import styled from '@emotion/styled';
+import { ModalProvider } from '@/contexts/ModalContext';
 
 const Container = styled.div`
   max-width: 960px;
@@ -23,10 +24,12 @@ function App({ Component, pageProps }: AppProps) {
       </Head>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
-          <Container>
-            <Component {...pageProps} />
-          </Container>
           <ReactQueryDevtools initialIsOpen={false} />
+          <ModalProvider>
+            <Container>
+              <Component {...pageProps} />
+            </Container>
+          </ModalProvider>
         </Hydrate>
       </QueryClientProvider>
     </>
