@@ -1,6 +1,6 @@
 import GNB from '@/components/navigation/GNB';
 
-const Folder = () => {
+const FolderDetailPage = () => {
   return (
     <>
       <GNB />
@@ -9,4 +9,4 @@ const Folder = () => {
   );
 };
 
-export default Folder;
+export default FolderDetailPage;

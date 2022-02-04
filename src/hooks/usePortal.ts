@@ -1,11 +1,13 @@
 import { isServer } from '@/utils/env/isServer';
 import { ReactNode, useEffect, useMemo, useRef } from 'react';
 import ReactDOM from 'react-dom';
+import useMounted from '@/hooks/useMounted';
 
 const usePortal = () => {
   const portal = useRef<HTMLDivElement>();
+  const isMounted = useMounted();
 
-  if (!portal.current && !isServer()) {
+  if (!portal.current && isMounted) {
     const portalId = Math.random().toString(36).substring(2);
 
     portal.current = document.createElement('div');
