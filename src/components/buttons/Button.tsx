@@ -1,11 +1,31 @@
+import React from 'react';
 import styled from '@emotion/styled';
 
-const Wrapper = styled.button`
+const ButtonWrapper = styled.button`
   height: 3.25rem;
+  border-radius: 10px;
 `;
 
-const Button = ({ content }) => {
-  return <Wrapper>{content}</Wrapper>;
+interface ButtonProps {
+  color: string;
+  children?: React.ReactNode;
+  onClick: () => void;
+  minWidth: string;
+}
+
+const Button: React.FC<ButtonProps> = ({ children, color, onClick, minWidth }) => {
+  return (
+    <ButtonWrapper
+      type="button"
+      onClick={onClick}
+      style={{
+        backgroundColor: color,
+        minWidth: minWidth,
+      }}
+    >
+      {children}
+    </ButtonWrapper>
+  );
 };
 
 export default Button;

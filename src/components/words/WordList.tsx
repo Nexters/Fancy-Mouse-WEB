@@ -1,13 +1,11 @@
+import Fallback from '@/components/fallback';
+
+const word = [
+  { name: 'word1', content: 'word1 content' },
+  { name: 'word2', content: 'word2 content' },
+];
 const WordList = () => {
-  // const { words } = useContext(WordContext);
-  // return (
-  //   <div className="word-list">
-  //     {words.map((word) => (
-  //       <Word key={word.id} word={word} />
-  //     ))}
-  //   </div>
-  // );
-  return <>WordList</>;
+  return word.length === 0 ? <>WordList</> : <Fallback isWord />;
 };
 
 export default WordList;

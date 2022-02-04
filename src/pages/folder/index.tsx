@@ -1,13 +1,17 @@
 import GNB from '@/components/navigation/GNB';
 import Layout from '@/components/layouts';
+import ListCounter from '@/components/layouts/ListCounter';
 
-const FolderList = () => {
+const FolderListPage = () => {
   return (
     <div>
       <GNB />
-      <Layout>폴더</Layout>
+      <Layout>
+        <ListCounter count={0} isWord={false} />
+        폴더
+      </Layout>
     </div>
   );
 };
 
-export default FolderList;
+export default FolderListPage;

@@ -5,7 +5,10 @@ import Tabs from '@/components/navigation/Tabs';
 
 const PageBody = styled('div')`
   width: 100%;
+  min-height: calc(100vh - 21rem);
   height: 100%;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Layout = ({ children }) => {
