@@ -62,6 +62,8 @@ export default class MyDocument extends Document {
           />
           <link rel="preload" href="/styles/font.css" as="style" />
           <link rel="stylesheet" type="text/css" href="/styles/font.css" />
+          <link rel="preload" href="/styles/globals.css" as="style" />
+          <link rel="stylesheet" type="text/css" href="/styles/globals.css" />
         </Head>
         <body>
           <Main />
