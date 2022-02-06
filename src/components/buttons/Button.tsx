@@ -18,8 +18,8 @@ const Button: React.FC<ButtonProps> = ({ children, color, onClick, minWidth }) =
     <ButtonWrapper
       type="button"
       onClick={onClick}
+      className={color}
       style={{
-        backgroundColor: color,
         minWidth: minWidth,
       }}
     >
