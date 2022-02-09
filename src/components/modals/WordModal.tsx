@@ -20,31 +20,56 @@ const ModalHeader = styled.section`
   line-height: 2.5rem;
   padding-left: 0.5rem;
 
+  .folder {
+    ${tw`bg-folder00 rounded-md text-white p-2 items-center`}
+    height: 2rem;
+    font-size: 0.75rem;
+    line-height: 0.9375rem;
+    margin-bottom: 1rem;
+  }
+
   .spelling {
     ${tw`text-gray-70 font-bold`}
     font-size: 2rem;
   }
 
   .created-text {
-    ${tw`text-gray-40`}
+    ${tw`text-gray-50`}
     font-size: 0.75rem;
     margin-right: 0.5rem;
   }
 
   .created-date {
-    ${tw`text-gray-50`}
+    ${tw`text-gray-60`}
     font-size: 0.75rem;
   }
 `;
 
 const WordDesc = styled.section`
-  ${tw`bg-gray-20 text-gray-60 p-4`}
+  ${tw`bg-gray-20 text-gray-60 p-4 flex flex-col`}
   border-radius: 0.3125rem;
   min-height: 5rem;
   max-height: 13.375rem;
   overflow-y: auto;
   font-size: 1rem;
   line-height: 1.5rem;
+  margin-bottom: 1rem;
+`;
+
+const Sentence = styled.section`
+  ${tw`bg-gray-20 text-gray-60 p-4 flex flex-col`}
+  border-radius: 0.3125rem;
+  min-height: 5rem;
+  max-height: 13.375rem;
+  overflow-y: auto;
+  font-size: 1rem;
+  line-height: 1.5rem;
+
+  .sentence-title {
+    ${tw`text-gray-50`}
+    font-size: 0.75rem;
+    line-height: 1.5rem;
+  }
 `;
 
 const Memo = styled.section`
@@ -58,13 +83,13 @@ const Memo = styled.section`
   line-height: 1.5rem;
 
   .memo-header {
-    ${tw`text-gray-40 block`}
+    ${tw`text-gray-50 block`}
     font-size: 0.75rem;
     margin-bottom: 0.5rem;
   }
 
   .memo-content {
-    ${tw`text-gray-60`}
+    ${tw`text-gray-70`}
     font-size: 1rem;
   }
 `;
@@ -84,7 +109,7 @@ const WordModal = () => {
   return (
     <Wrapper>
       <ModalHeader>
-        <span>{selectedWord?.folderId}</span>
+        <span className="folder">{selectedWord?.folderId}</span>
         <span className="spelling">{selectedWord?.spelling}</span>
         <p>
           <span className="created-text">저장한 일시</span>
@@ -95,24 +120,26 @@ const WordModal = () => {
         {selectedWord?.meaning}
         {selectedWord?.meaning_en}
       </WordDesc>
+      <Sentence>
+        <span className="sentence-title">함께 저장한 문장</span>
+        문장문장
+      </Sentence>
       <Memo>
         <span className="memo-header">내가 남긴 메모</span>
         <span className="memo-content">메모메모</span>
       </Memo>
       <ModalFooter>
-        <div>
-          <Button color={'bg-white'} onClick={handleClickDelete} minWidth={'5.6rem'}>
-            <span className="text-gray-50">삭제하기</span>
+        <div css={{ display: 'flex' }}>
+          <Button color={'bg-white'} onClick={handleClickDelete} minWidth={'6.1rem'}>
+            <span className="text-folder07">삭제하기</span>
+          </Button>
+          <Button color={'bg-white'} onClick={handleClickDelete} minWidth={'6.1rem'}>
+            <span className="text-primary">수정하기</span>
           </Button>
         </div>
-        <div css={{ display: 'flex', gap: '1rem' }}>
-          <Button color={'bg-gray-20'} onClick={handleClickDelete} minWidth={'5.6rem'}>
-            <span className="text-gray-50">수정하기</span>
-          </Button>
-          <Button color={'bg-primary'} onClick={handleClickClose} minWidth={'3.8rem'}>
-            <span className="text-white">닫기</span>
-          </Button>
-        </div>
+        <Button color={'bg-primary'} onClick={handleClickClose} minWidth={'4.8rem'}>
+          <span className="text-white">닫기</span>
+        </Button>
       </ModalFooter>
     </Wrapper>
   );
