@@ -13,7 +13,7 @@ const Logo = styled.h1`
 const GNBWrapper = styled.nav`
   ${tw`flex justify-between bg-primaryDark`}
   width: 60rem;
-  height: 11.5rem;
+  max-height: 11.5rem;
   margin-bottom: 2rem;
   padding: 1.5rem;
   border-radius: 1.25rem;
@@ -26,12 +26,13 @@ const UserText = styled.p`
 `;
 
 const GNB = () => {
-  const { pathname } = useRouter();
+  const { pathname, query } = useRouter();
+  const isFolderDetailPage = !!query.folderId;
   return (
     <GNBWrapper>
       <div>
         <Logo>Fancy Mouse</Logo>
-        <Tabs pathname={pathname} />
+        {!isFolderDetailPage && <Tabs pathname={pathname} />}
       </div>
       <UserText>
         UserName<span className="text-gray-40 font-normal">님</span>
