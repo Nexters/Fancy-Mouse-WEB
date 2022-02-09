@@ -26,13 +26,13 @@ function App({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <ReactQueryDevtools initialIsOpen={false} />
-          <ModalProvider>
-            <WordProvider>
+          <WordProvider>
+            <ModalProvider>
               <Container>
                 <Component {...pageProps} />
               </Container>
-            </WordProvider>
-          </ModalProvider>
+            </ModalProvider>
+          </WordProvider>
         </Hydrate>
       </QueryClientProvider>
     </>

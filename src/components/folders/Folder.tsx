@@ -1,6 +1,7 @@
 import { Folder } from './type';
 import styled from '@emotion/styled';
 import tw from 'twin.macro';
+import { useRouter } from 'next/router';
 
 const Wrapper = styled.li`
   ${tw`bg-white/20 p-10 text-gray-70 font-bold`}
@@ -16,8 +17,16 @@ const Wrapper = styled.li`
     border-radius: 20px;
   }
 `;
+
 const FolderItem = ({ folder }: { folder: Folder }) => {
-  return <Wrapper>{folder.folderName}</Wrapper>;
+  const router = useRouter();
+  const handleClickFolder = () => {
+    router.push({
+      pathname: '/folder/[folderId]',
+      query: { folderId: folder.folderId },
+    });
+  };
+  return <Wrapper onClick={() => handleClickFolder()}>{folder.folderName}</Wrapper>;
 };
 
 export default FolderItem;
