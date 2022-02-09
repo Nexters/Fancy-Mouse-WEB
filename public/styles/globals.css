@@ -388,7 +388,7 @@ Ensure the default browser behavior of the `hidden` attribute.
         font-family: 'Spoqa Han Sans Neo', sans-serif !important;
         padding: 0;
         margin: 0;
-        background: #fafafa;
+        background: #EEF1F4;
     }
 
 *, ::before, ::after {
@@ -444,6 +444,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .relative {
   position: relative;
 }
+.mx-6 {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
 .mb-4 {
   margin-bottom: 1rem;
 }
@@ -462,24 +466,31 @@ Ensure the default browser behavior of the `hidden` attribute.
 .items-start {
   align-items: flex-start;
 }
-.items-center {
-  align-items: center;
-}
 .justify-between {
   justify-content: space-between;
 }
 .rounded {
   border-radius: 0.25rem;
 }
+.rounded-lg {
+  border-radius: 0.5rem;
+}
 .border {
   border-width: 1px;
-}
-.border-b-2 {
-  border-bottom-width: 2px;
 }
 .border-gray-30 {
   --tw-border-opacity: 1;
   border-color: rgb(238 241 244 / var(--tw-border-opacity));
+}
+.border-white\/20 {
+  border-color: rgb(255 255 255 / 0.2);
+}
+.border-transparent {
+  border-color: transparent;
+}
+.border-white {
+  --tw-border-opacity: 1;
+  border-color: rgb(255 255 255 / var(--tw-border-opacity));
 }
 .bg-white {
   --tw-bg-opacity: 1;
@@ -493,11 +504,26 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-bg-opacity: 1;
   background-color: rgb(41 47 55 / var(--tw-bg-opacity));
 }
+.bg-primaryDark {
+  --tw-bg-opacity: 1;
+  background-color: rgb(25 27 30 / var(--tw-bg-opacity));
+}
+.bg-white\/40 {
+  background-color: rgb(255 255 255 / 0.4);
+}
+.bg-folder00 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(191 205 222 / var(--tw-bg-opacity));
+}
 .p-5 {
   padding: 1.25rem;
 }
 .p-4 {
   padding: 1rem;
+}
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 .px-6 {
   padding-left: 1.5rem;
@@ -512,6 +538,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .font-bold {
   font-weight: 700;
+}
+.font-normal {
+  font-weight: 400;
+}
+.leading-5 {
+  line-height: 1.25rem;
 }
 .text-gray-70 {
   --tw-text-opacity: 1;
@@ -532,6 +564,13 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+.text-secondary {
+  --tw-text-opacity: 1;
+  color: rgb(234 255 174 / var(--tw-text-opacity));
+}
+.opacity-25 {
+  opacity: 0.25;
 }
 .shadow-lg {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);

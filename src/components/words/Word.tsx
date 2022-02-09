@@ -7,25 +7,26 @@ import { ModalContext } from '@/contexts/ModalContext';
 import { useWordContext } from '@/contexts/WordContext';
 
 const Wrapper = styled.li`
-  background: #ffffff;
-  border-radius: 10px;
+  ${tw`bg-white/40 py-4`}
+  border: 1px solid white;
+  border-radius: 1.25rem;
   width: 19rem;
   min-height: 14rem;
-  //min-height: 14rem;
-  max-height: 23rem;
-  padding-top: 1.875rem;
-  padding-bottom: 1rem;
+  max-height: 20rem;
 
   &:hover {
-    box-shadow: 0px 10px 40px rgba(58, 69, 82, 0.1);
-    border-radius: 10px;
+    ${tw`bg-white`}
+    box-shadow: 0px 10px 40px rgba(77, 98, 125, 0.2);
+    border-radius: 20px;
   }
 `;
 
 const WordHeader = styled.span`
-  ${tw`flex justify-between px-6 mb-4 text-gray-60`}
+  ${tw`flex justify-between px-6 mb-4 text-gray-60 bg-folder00 mx-6 items-center text-white`}
   font-size: 0.75rem;
   line-height: 0.9375rem;
+  border-radius: 0.5rem;
+  height: 2rem;
 `;
 
 const WordSpelling = styled.span`
@@ -50,12 +51,13 @@ const WordDate = styled.span`
   line-height: 15px;
 
   .created-text {
-    ${tw`text-gray-40`}
+    ${tw`text-gray-50`}
     font-size: 0.75rem;
     margin-right: 0.5rem;
   }
 
   .created-date {
+    ${tw`text-gray-60`}
     font-size: 0.75rem;
   }
 `;

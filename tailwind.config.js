@@ -33,6 +33,7 @@ module.exports = {
       folder10: '#BEDB84',
       folder11: '#74DAA9',
       folder00: '#BFCDDE',
+      transparent: 'transparent',
     },
   },
   plugins: [],
