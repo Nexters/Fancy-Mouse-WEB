@@ -6,25 +6,20 @@ import { PATH_NAME } from '@/components/layouts/constants';
 import { TapProps } from '@/components/navigation/type';
 
 const TabWrapper = styled('nav')`
-  ${tw`flex border-b-2 font-bold`}
+  ${tw`flex`}
   background: transparent;
   align-items: center;
-  height: 2.625rem;
-  border-color: #e9ebee;
-  margin-bottom: 2.5rem;
   gap: 1rem;
-  background: transparent;
+  margin-top: 2rem;
 `;
-const Tab = styled('div')<TapProps>`
-  color: ${({ isSelected }) => (isSelected ? '#3A4552' : '#c5c8cd')};
-  border-bottom: ${({ isSelected }) => (isSelected ? '2px solid black' : '#e9ebee')};
-  z-index: 1;
-  height: inherit;
-  font-size: 1.125rem;
-  line-height: 1.5rem;
-`;
+const Tab = styled.div<TapProps>([
+  ({ isSelected }) =>
+    isSelected ? tw`text-secondary bg-primary rounded-lg border border-white/20` : tw`text-white opacity-25`,
+  tw`font-bold p-4 text-lg leading-5`,
+]);
 
 const Tabs = ({ pathname }) => {
+  // TODO: refactor logic
   const isWordTab = pathname === PATH_NAME.WORD || pathname === null;
   const isFolderTab = pathname === PATH_NAME.FOLDER;
   return (
