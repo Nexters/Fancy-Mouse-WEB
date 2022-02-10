@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 const ButtonWrapper = styled.button`
   height: 3.25rem;
   border-radius: 10px;
+  padding: 1rem 1rem;
 `;
 
 interface ButtonProps {

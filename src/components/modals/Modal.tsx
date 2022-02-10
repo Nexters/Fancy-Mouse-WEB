@@ -23,8 +23,8 @@ const Layer = styled.div`
   top: 50%;
   left: 50%;
   overflow: hidden;
-  width: 100%;
-  max-width: 30rem;
+  //width: 100%;
+  //max-width: 30rem;
   transform: translate(-50%, -50%);
   border-radius: 1.25rem;
 `;
@@ -41,17 +41,12 @@ const ModalFactory = (modalType: ModalType) => {
 };
 
 const Modal = () => {
-  const { handleModal, visible, modalType } = useContext(ModalContext);
+  const { visible, modalType } = useContext(ModalContext);
   const { Portal } = usePortal();
-
-  const handleOutsideClick = (e) => {
-    e.preventDefault();
-    handleModal();
-  };
 
   return visible ? (
     <Portal>
-      <Container onClick={handleOutsideClick}>
+      <Container>
         <Layer>{ModalFactory(modalType)}</Layer>
       </Container>
     </Portal>
