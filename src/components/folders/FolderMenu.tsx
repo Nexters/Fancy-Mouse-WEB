@@ -2,6 +2,9 @@ import styled from '@emotion/styled';
 import tw from 'twin.macro';
 import BtnEdit from '@assets/icons/btn_edit.svg';
 import BtnTrash from '@assets/icons/btn_trash.svg';
+import { useContext } from 'react';
+import { ModalContext } from '@/contexts/ModalContext';
+import { MODAL_TYPE } from '@/components/modals/type';
 
 const Wrapper = styled.div`
   position: relative;
@@ -37,6 +40,11 @@ const ListItem = styled.li`
 `;
 
 const FolderMenu = () => {
+  const { handleModal } = useContext(ModalContext);
+  const handleClickDelete = (e) => {
+    e.stopPropagation();
+    handleModal(MODAL_TYPE.DELETE);
+  };
   return (
     <Wrapper>
       <Menu>
@@ -45,7 +53,7 @@ const FolderMenu = () => {
             <BtnEdit className="mr-2" />
             폴더 수정
           </ListItem>
-          <ListItem className="delete">
+          <ListItem className="delete" onClick={handleClickDelete}>
             <BtnTrash className="mr-2" />
             폴더 삭제
           </ListItem>

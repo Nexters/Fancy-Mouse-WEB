@@ -6,6 +6,7 @@ import { MODAL_TYPE, ModalType } from '@/components/modals/type';
 import FolderModal from '@/components/modals/FolderModal';
 import WordModal from '@/components/modals/WordModal';
 import tw from 'twin.macro';
+import DeleteModal from '@/components/modals/DeleteModal';
 
 const Container = styled.div`
   position: fixed;
@@ -35,6 +36,8 @@ const ModalFactory = (modalType: ModalType) => {
       return <FolderModal />;
     case MODAL_TYPE.WORD:
       return <WordModal />;
+    case MODAL_TYPE.DELETE:
+      return <DeleteModal />;
     default:
       return null;
   }
