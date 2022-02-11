@@ -2,9 +2,11 @@ import { Folder } from './type';
 import styled from '@emotion/styled';
 import tw from 'twin.macro';
 import { useRouter } from 'next/router';
+import FolderMenu from '@/components/folders/FolderMenu';
+import BtnMenu from '@assets/icons/btn_menu.svg';
 
 const Wrapper = styled.li`
-  ${tw`bg-white/20 p-10 text-gray-70 font-bold`}
+  ${tw`flex justify-between bg-white/20 p-10 text-gray-70 font-bold items-center`}
   border: 1px solid white;
   border-radius: 1.25rem;
   height: 7rem;
@@ -26,7 +28,15 @@ const FolderItem = ({ folder }: { folder: Folder }) => {
       query: { folderId: folder.folderId },
     });
   };
-  return <Wrapper onClick={() => handleClickFolder()}>{folder.folderName}</Wrapper>;
+  return (
+    <Wrapper onClick={() => handleClickFolder()}>
+      {folder.folderName}
+      <div>
+        <BtnMenu className="btn-menu" />
+        <FolderMenu />
+      </div>
+    </Wrapper>
+  );
 };
 
 export default FolderItem;
