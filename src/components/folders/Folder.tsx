@@ -4,6 +4,7 @@ import tw from 'twin.macro';
 import { useRouter } from 'next/router';
 import FolderMenu from '@/components/folders/FolderMenu';
 import BtnMenu from '@assets/icons/btn_menu.svg';
+import useVisible from '@/hooks/useVisible';
 
 const Wrapper = styled.li`
   ${tw`flex justify-between bg-white/20 p-10 text-gray-70 font-bold items-center`}
@@ -22,18 +23,27 @@ const Wrapper = styled.li`
 
 const FolderItem = ({ folder }: { folder: Folder }) => {
   const router = useRouter();
+  const { ref, isVisible, setIsVisible } = useVisible(false);
   const handleClickFolder = () => {
     router.push({
       pathname: '/folder/[folderId]',
       query: { folderId: folder.folderId },
     });
   };
+  const handleClickMenu = (e) => {
+    e.stopPropagation();
+    setIsVisible(true);
+  };
   return (
     <Wrapper onClick={() => handleClickFolder()}>
       {folder.folderName}
       <div>
-        <BtnMenu className="btn-menu" />
-        <FolderMenu />
+        <BtnMenu className="btn-menu" onClick={handleClickMenu} />
+        {isVisible && (
+          <div ref={ref}>
+            <FolderMenu />
+          </div>
+        )}
       </div>
     </Wrapper>
   );

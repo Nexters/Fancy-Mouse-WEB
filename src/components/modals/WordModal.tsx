@@ -7,7 +7,7 @@ import { ModalContext } from '@/contexts/ModalContext';
 
 const Wrapper = styled.div`
   width: 100%;
-  min-width: 30rem;
+  width: 30rem;
   min-height: 27rem;
   padding: 2rem 1rem 1rem;
   box-shadow: 0px 10px 40px rgba(58, 69, 82, 0.4);
