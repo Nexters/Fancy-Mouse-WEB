@@ -1,24 +1,16 @@
 import Fallback from '@/components/fallback';
 import Word from '@/components/words/Word';
 import styled from '@emotion/styled';
-
-import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, set, child, get } from 'firebase/database';
 import { useEffect, useState } from 'react';
 
-const firebaseConfig = {
-  databaseURL: 'https://fancymouse-cb040-default-rtdb.firebaseio.com/',
-};
-
-initializeApp(firebaseConfig);
-const db = getDatabase();
-
 // TODO : 나중에 지우기
 const saveWords = async () => {
+  const db = getDatabase();
   set(ref(db, 'userId/words'), {
     data: [
       {
-        spelling: 'providdhkddㅇe',
+        spelling: 'provide',
         wordId: 123,
         meaning_en: [
           '(vrb) give something useful or necessary to',

@@ -7,6 +7,7 @@ import '../styles/globals.css';
 import styled from '@emotion/styled';
 import { ModalProvider } from '@/contexts/ModalContext';
 import { WordProvider } from '@/contexts/WordContext';
+import { initializeApp } from 'firebase/app';
 
 const Container = styled.div`
   max-width: 960px;
@@ -16,6 +17,10 @@ const Container = styled.div`
 `;
 
 function App({ Component, pageProps }: AppProps) {
+  const firebaseConfig = {
+    databaseURL: 'https://fancymouse-cb040-default-rtdb.firebaseio.com/',
+  };
+  initializeApp(firebaseConfig);
   const [queryClient] = useState(() => new QueryClient());
 
   return (
