@@ -18,7 +18,14 @@ const Container = styled.div`
 
 function App({ Component, pageProps }: AppProps) {
   const firebaseConfig = {
-    databaseURL: 'https://fancymouse-cb040-default-rtdb.firebaseio.com/',
+    apiKey: process.env.FIREBASE_API_KEY,
+    authDomain: `${process.env.FIREBASE_PROJECT_ID}.firebaseapp.com`,
+    databaseURL: 'https://fancymouse-cb040-default-rtdb.firebaseio.com',
+    projectId: process.env.FIREBASE_PROJECT_ID,
+    storageBucket: `${process.env.FIREBASE_PROJECT_ID}.appspot.com`,
+    messagingSenderId: process.env.FIREBASE_MESSAGEING_SENDER_ID,
+    appId: process.env.FIREBASE_APP_ID,
+    measurementId: process.env.FIREBASE_MESUAREMENT_ID,
   };
   initializeApp(firebaseConfig);
   const [queryClient] = useState(() => new QueryClient());

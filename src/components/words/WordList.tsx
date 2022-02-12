@@ -8,8 +8,8 @@ import { WordModel } from './type';
 // TODO : 나중에 지우기
 const saveWords = async () => {
   const db = getDatabase();
-  set(ref(db, 'userId/words'), {
-    data: [
+  set(ref(db, 'users/uid/folders'), {
+    words: [
       {
         spelling: 'provide',
         wordId: 123,
@@ -125,7 +125,7 @@ const saveWords = async () => {
 
 const findWords = async () => {
   const dbRef = ref(getDatabase());
-  const snapshot = await get(child(dbRef, `userId/words`));
+  const snapshot = await get(child(dbRef, `users/uid/folders/words`));
   if (snapshot.exists()) {
     return snapshot.val();
   }
@@ -142,8 +142,7 @@ const WordListWrapper = styled.ul`
 
 const getWordList = async () => {
   await saveWords();
-  const temp = await findWords();
-  const wordList = temp.data;
+  const wordList = await findWords();
   return wordList;
 };
 
