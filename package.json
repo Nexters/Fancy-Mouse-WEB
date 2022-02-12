@@ -6,7 +6,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "style": "postcss src/styles/globals.css -o public/styles/globals.css"
+    "style": "postcss src/styles/globals.css -o public/styles/globals.css",
+    "icon": "npx @svgr/cli --out-dir src/assets/icons --typescript public/assets/icons"
   },
   "babelMacros": {
     "twin": {

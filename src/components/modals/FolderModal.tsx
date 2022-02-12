@@ -1,8 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from '@emotion/styled';
 import tw from 'twin.macro';
 import Button from '@/components/buttons/Button';
 import { ModalContext } from '@/contexts/ModalContext';
+import CircleDefault from '@/assets/icons/IcCircleDefault';
+import CircleHover from '@/assets/icons/IcCircleHover';
+import CircleSelect from '@/assets/icons/IcCircleCheck';
+import { FOLDER_COLORS } from '@/components/modals/constants';
 
 const Wrapper = styled.div`
   ${tw`flex flex-col w-full p-6`}
@@ -34,25 +38,16 @@ const FolderTitleInput = styled.input`
   margin-top: 0.5rem;
 `;
 
-const FolderColors = [
-  'folder01',
-  'folder02',
-  'folder03',
-  'folder04',
-  'folder05',
-  'folder06',
-  'folder07',
-  'folder08',
-  'folder09',
-  'folder10',
-  'folder11',
-  'folder00',
-];
-
-const ColorList = styled.div`
-  ${tw`flex flex-wrap`}
-  gap: 1.25rem;
+const ColorList = styled.ul`
+  ${tw`flex flex-wrap justify-center`}
+  gap: 1rem;
   margin-top: 1rem;
+
+  .folder-item {
+    ${tw`flex items-center`}
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+  }
 `;
 
 const ButtonGroup = styled.div`
@@ -61,10 +56,25 @@ const ButtonGroup = styled.div`
   gap: 0.5rem;
 `;
 
+const ColorItem = (folder, hoveredId, selectedId) => {
+  if (folder.folderId === selectedId) return <CircleSelect color={folder.color} />;
+  else if (folder.folderId === hoveredId) return <CircleHover color={folder.color} />;
+
+  return <CircleDefault color={folder.color} />;
+};
+
 const FolderModal = () => {
   const { handleModal } = useContext(ModalContext);
   const handleClickClose = () => {
     handleModal();
+  };
+  const [hoveredFolderId, setHoveredFolderId] = useState<string>('');
+  const [selectedFolderId, setSelectedFolderId] = useState<string>('');
+  const handleMouseEvent = (hoveredId: string) => {
+    setHoveredFolderId(hoveredId);
+  };
+  const handleClick = (selectedId: string) => {
+    setSelectedFolderId(selectedId);
   };
   return (
     <Wrapper>
@@ -73,8 +83,19 @@ const FolderModal = () => {
       <FolderTitleInput type="text" minLength={1} maxLength={8} placeholder="폴더명을 입력하세요" />
       <SubTitle>폴더 색상</SubTitle>
       <ColorList>
-        {FolderColors.map((color) => {
-          return <span className={`bg-${color} rounded-full w-10 h-10`} key={color} />;
+        {FOLDER_COLORS.map((folder: { color: string; folderId: string }) => {
+          return (
+            <li
+              key={folder.folderId}
+              onMouseEnter={() => handleMouseEvent(folder.folderId)}
+              onMouseLeave={() => handleMouseEvent('')}
+              onClick={() => handleClick(folder.folderId)}
+              id={folder.folderId}
+              className="folder-item"
+            >
+              {ColorItem(folder, hoveredFolderId, selectedFolderId)}
+            </li>
+          );
         })}
       </ColorList>
       <ButtonGroup>
