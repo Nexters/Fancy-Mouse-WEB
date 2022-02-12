@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from '@emotion/styled';
 import tw from 'twin.macro';
 import Button from '@/components/buttons/Button';
