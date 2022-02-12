@@ -8,8 +8,8 @@ import { FolderModel } from './type';
 
 const saveFolders = async () => {
   const db = getDatabase();
-  set(ref(db, 'userId/folders'), {
-    data: [
+  set(ref(db, 'users/uid'), {
+    folders: [
       {
         folderId: 1,
         createdAt: '2022-02-01T12:23:45',
@@ -106,7 +106,7 @@ const saveFolders = async () => {
 
 const findFolders = async () => {
   const dbRef = ref(getDatabase());
-  const snapshot = await get(child(dbRef, `userId/folders`));
+  const snapshot = await get(child(dbRef, `users/uid/folders`));
   if (snapshot.exists()) {
     return snapshot.val();
   }
@@ -114,8 +114,7 @@ const findFolders = async () => {
 
 const getFolderList = async () => {
   await saveFolders();
-  const temp = await findFolders();
-  const folderList = temp.data;
+  const folderList = await findFolders();
   return folderList;
 };
 
