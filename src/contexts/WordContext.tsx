@@ -1,17 +1,17 @@
 import React, { createContext, ReactNode, useContext } from 'react';
-import { Word } from '@/components/words/type';
+import { WordModel } from '@/components/words/type';
 
 interface WordContextState {
-  selectedWord: Word | null;
-  selectWord: (word: Word) => void;
+  selectedWord: WordModel | null;
+  selectWord: (word: WordModel) => void;
 }
 
 export const WordContext = createContext<WordContextState>({} as WordContextState);
 
 export const WordProvider = ({ children }: { children: ReactNode }) => {
-  const [selectedWord, setSelectedWord] = React.useState<Word | null>(null);
+  const [selectedWord, setSelectedWord] = React.useState<WordModel | null>(null);
 
-  const selectWord = (word: Word) => {
+  const selectWord = (word: WordModel) => {
     setSelectedWord(word);
   };
 

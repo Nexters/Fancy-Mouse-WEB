@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import tw from 'twin.macro';
-import { Word } from './type';
+import { WordModel } from './type';
 import { MODAL_TYPE } from '@/components/modals/type';
 import { ModalContext } from '@/contexts/ModalContext';
 import { useWordContext } from '@/contexts/WordContext';
@@ -62,7 +62,7 @@ const WordDate = styled.span`
   }
 `;
 
-const WordItem = ({ word }: { word: Word }) => {
+const WordItem = ({ word }: { word: WordModel }) => {
   const { handleModal } = React.useContext(ModalContext);
   const { selectWord, selectedWord } = useWordContext();
 
