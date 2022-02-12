@@ -3,6 +3,7 @@ import Word from '@/components/words/Word';
 import styled from '@emotion/styled';
 import { getDatabase, ref, set, child, get } from 'firebase/database';
 import { useEffect, useState } from 'react';
+import { WordModel } from './type';
 
 // TODO : 나중에 지우기
 const saveWords = async () => {
@@ -147,12 +148,7 @@ const getWordList = async () => {
 };
 
 const WordList = () => {
-  const [wordList, setWordList] = useState([
-    {
-      // TODO
-      wordId: 1,
-    },
-  ]);
+  const [wordList, setWordList] = useState<WordModel[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {

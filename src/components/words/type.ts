@@ -1,4 +1,4 @@
-export interface Word {
+export interface WordModel {
   wordId: number;
   spelling?: string;
   meaning?: string[];

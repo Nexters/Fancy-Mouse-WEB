@@ -1,4 +1,4 @@
-import { Folder } from './type';
+import { FolderModel } from './type';
 import styled from '@emotion/styled';
 import tw from 'twin.macro';
 import { useRouter } from 'next/router';
@@ -21,7 +21,7 @@ const Wrapper = styled.li`
   }
 `;
 
-const FolderItem = ({ folder }: { folder: Folder }) => {
+const FolderItem = ({ folder }: { folder: FolderModel }) => {
   const router = useRouter();
   const { ref, isVisible, setIsVisible } = useVisible(false);
   const handleClickFolder = () => {

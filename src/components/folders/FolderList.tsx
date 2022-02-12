@@ -4,6 +4,7 @@ import Folder from '@/components/folders/Folder';
 import tw from 'twin.macro';
 import { child, get, getDatabase, ref, set } from 'firebase/database';
 import { useEffect, useState } from 'react';
+import { FolderModel } from './type';
 
 const saveFolders = async () => {
   const db = getDatabase();
@@ -126,7 +127,7 @@ const FolderListWrapper = styled.ul`
 `;
 
 const FolderList = () => {
-  const [folderList, setFolderList] = useState([]);
+  const [folderList, setFolderList] = useState<FolderModel[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {

@@ -1,9 +1,9 @@
-import { Word } from '@/components/words/type';
+import { WordModel } from '@/components/words/type';
 
-export interface Folder {
+export interface FolderModel {
   folderId: number;
   createdAt: string;
   folderName: string;
   color: string;
-  wordList: Word[];
+  wordList: WordModel[];
 }
