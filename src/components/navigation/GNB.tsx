@@ -3,11 +3,11 @@ import tw from 'twin.macro';
 import React from 'react';
 import Tabs from '@/components/navigation/Tabs';
 import { useRouter } from 'next/router';
+import LogoImg from '@assets/icons/logo.svg';
 
 const Logo = styled.h1`
   ${tw`font-bold text-white`}
   font-size: 2rem;
-  margin-left: 1rem;
 `;
 
 const GNBWrapper = styled.nav`
@@ -31,7 +31,9 @@ const GNB = () => {
   return (
     <GNBWrapper>
       <div>
-        <Logo>Fancy Mouse</Logo>
+        <Logo>
+          <LogoImg />
+        </Logo>
         {!isFolderDetailPage && <Tabs pathname={pathname} />}
       </div>
       <UserText>
