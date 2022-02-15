@@ -7,12 +7,13 @@ import { ModalContext } from '@/contexts/ModalContext';
 import { useWordContext } from '@/contexts/WordContext';
 
 const Wrapper = styled.li`
-  ${tw`bg-white/40 py-4`}
+  ${tw`bg-white/40`}
   border: 1px solid white;
   border-radius: 1.25rem;
   width: 19rem;
-  min-height: 14rem;
-  max-height: 20rem;
+  //min-height: 14rem;
+  //max-height: 20rem;
+  height: 18.4375rem;
 
   &:hover {
     ${tw`bg-white`}
@@ -22,11 +23,12 @@ const Wrapper = styled.li`
 `;
 
 const WordHeader = styled.span`
-  ${tw`flex justify-between px-6 mb-4 text-gray-60 bg-folder00 mx-6 items-center text-white`}
+  ${tw`flex justify-between text-gray-60 items-center`}
   font-size: 0.75rem;
-  line-height: 0.9375rem;
   border-radius: 0.5rem;
-  height: 2rem;
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
 `;
 
 const WordSpelling = styled.span`
@@ -36,19 +38,17 @@ const WordSpelling = styled.span`
 `;
 
 const WordDesc = styled.section`
-  ${tw`bg-gray-20 text-gray-60 p-4`}
+  ${tw`bg-gray-20 text-gray-60 p-4 my-4 mx-2`}
   border-radius: 0.625rem;
-  min-height: 3.5rem;
-  max-height: 12.5rem;
-  overflow-y: auto;
+  height: 9.5rem;
+  //min-height: 3.5rem;
+  //max-height: 12.5rem;
   font-size: 1rem;
-  line-height: 1.5rem;
-  margin: 1.5rem 0.5rem 1rem;
 `;
 
 const WordDate = styled.span`
   ${tw`pl-6`}
-  line-height: 15px;
+  line-height: 0.9375rem;
 
   .created-text {
     ${tw`text-gray-50`}
