@@ -1,12 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useWordContext } from '@/contexts/WordContext';
 import styled from '@emotion/styled';
 import tw from 'twin.macro';
 import Button from '@/components/buttons/Button';
 import { ModalContext } from '@/contexts/ModalContext';
+import { BtnEdit, BtnTrash } from '@/assets/icons';
 
 const Wrapper = styled.div`
-  width: 100%;
   width: 30rem;
   min-height: 27rem;
   padding: 2rem 1rem 1rem;
@@ -21,7 +21,7 @@ const ModalHeader = styled.section`
   padding-left: 0.5rem;
 
   .folder {
-    ${tw`bg-folder00 rounded-md text-white p-2 items-center`}
+    ${tw`text-gray-60 p-2 items-center`}
     height: 2rem;
     font-size: 0.75rem;
     line-height: 0.9375rem;
@@ -72,8 +72,9 @@ const Sentence = styled.section`
   }
 `;
 
-const Memo = styled.section`
-  ${tw`border border-gray-30 p-4`}
+const Memo = styled.section<{ isEditMode: boolean }>`
+  ${({ isEditMode }) => (isEditMode ? tw`border border-primary p-4` : tw`border border-gray-30 p-4`)}
+
   min-height: 5.5rem;
   max-height: 13rem;
   overflow-y: auto;
@@ -83,14 +84,24 @@ const Memo = styled.section`
   line-height: 1.5rem;
 
   .memo-header {
-    ${tw`text-gray-50 block`}
+    ${tw`text-gray-50 block flex justify-between`}
     font-size: 0.75rem;
     margin-bottom: 0.5rem;
+
+    .memo-header-btn {
+      ${tw`text-primary`}
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.875rem;
+    }
   }
 
   .memo-content {
-    ${tw`text-gray-70`}
+    ${tw`text-gray-70 flex`}
     font-size: 1rem;
+    width: 100%;
+    flex-grow: 1;
+    resize: none !important;
   }
 `;
 
@@ -100,11 +111,22 @@ const ModalFooter = styled.section`
 const WordModal = () => {
   const { selectedWord } = useWordContext();
   const { handleModal } = useContext(ModalContext);
+  const [isEditMode, setIsEditMode] = useState<boolean>(false);
+  const [memo, setMemo] = useState<string>(selectedWord?.memo ?? '');
   const handleClickDelete = () => {
     console.log('delete');
   };
+  const handleClickEdit = () => {
+    setIsEditMode(true);
+  };
+  const handleClickSave = () => {
+    setIsEditMode(false);
+  };
   const handleClickClose = () => {
     handleModal();
+  };
+  const onChangeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setMemo(event.target.value);
   };
   return (
     <Wrapper>
@@ -124,19 +146,35 @@ const WordModal = () => {
         <span className="sentence-title">함께 저장한 문장</span>
         문장문장
       </Sentence>
-      <Memo>
-        <span className="memo-header">내가 남긴 메모</span>
-        <span className="memo-content">메모메모</span>
+      <Memo isEditMode={isEditMode}>
+        <span className="memo-header">
+          내가 남긴 메모
+          {isEditMode ? (
+            <button onClick={handleClickSave}>
+              <span className="memo-header-btn">저장하기</span>
+            </button>
+          ) : (
+            <button onClick={handleClickEdit}>
+              <span className="memo-header-btn">
+                <BtnEdit />
+                수정하기
+              </span>
+            </button>
+          )}
+        </span>
+        {isEditMode ? (
+          <textarea className="memo-content" maxLength={140} value={memo} onChange={onChangeHandler} />
+        ) : (
+          <p className="memo-content">{selectedWord?.memo}</p>
+        )}
       </Memo>
       <ModalFooter>
-        <div css={{ display: 'flex' }}>
-          <Button color={'bg-white'} onClick={handleClickDelete} minWidth={'6.1rem'}>
-            <span className="text-folder07">삭제하기</span>
-          </Button>
-          <Button color={'bg-white'} onClick={handleClickDelete} minWidth={'6.1rem'}>
-            <span className="text-primary">수정하기</span>
-          </Button>
-        </div>
+        <button onClick={handleClickDelete}>
+          <span className="text-folder07 flex items-center">
+            <BtnTrash />
+            삭제하기
+          </span>
+        </button>
         <Button color={'bg-primary'} onClick={handleClickClose} minWidth={'4.8rem'}>
           <span className="text-white">닫기</span>
         </Button>

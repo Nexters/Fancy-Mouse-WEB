@@ -34,10 +34,10 @@ const DeleteModal = () => {
       <Title>이 폴더를 정말 삭제하시겠어요?</Title>
       <ButtonGroup>
         <Button color={'bg-gray-30'} onClick={handleClickClose} minWidth={'7.1rem'}>
-          <span className="text-gray-70">삭제하기</span>
+          <span className="text-gray-70">취소</span>
         </Button>
         <Button color={'bg-primary'} onClick={handleClickDelete} minWidth={'7.1rem'}>
-          <span className="text-white">수정하기</span>
+          <span className="text-secondary">삭제하기</span>
         </Button>
       </ButtonGroup>
     </Wrapper>
