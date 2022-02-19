@@ -1,4 +1,4 @@
-import { child, get, getDatabase, ref, set } from 'firebase/database';
+import { child, get, getDatabase, push, ref, set } from 'firebase/database';
 import { FolderModel } from '@/components/folders/type';
 import { WordModel } from '@/components/words/type';
 
@@ -11,9 +11,9 @@ export const findAllFolders = async (): Promise<FolderModel[]> => {
   return [];
 };
 
-export const saveFolder = async (folderId: string, folderName: string, color: string) => {
+export const saveFolder = async (folderName: string, color: string) => {
   const db = getDatabase();
-  const newFolderId = folderId;
+  const newFolderId = push(child(ref(db), 'users/uuid/folders')).key;
   const folder: FolderModel = {
     folderId: newFolderId,
     createdAt: Date.now(),
@@ -44,7 +44,10 @@ export const findAllWords = async (): Promise<WordModel[]> => {
     const folders: FolderModel[] = Object.values(snapshot.val());
     const words: WordModel[] = [];
     for (const folder of folders) {
-      words.push(...folder.wordList);
+      console.log(folder);
+      if (folder.wordList) {
+        words.push(...folder.wordList);
+      }
     }
     words.sort((a, b) => {
       if (a.createdAt > b.createdAt) {

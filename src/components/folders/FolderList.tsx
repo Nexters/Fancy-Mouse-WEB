@@ -50,7 +50,7 @@ const saveDummyFolders = async () => {
   });
   await saveWord('folder02', {
     spelling: 'provide',
-    wordId: 123,
+    wordId: 1234,
     meaning: ['제공하다', '주다'],
     synonyms: ['hide', 'hat', 'face', 'veil', 'disguise', 'camouflage'],
     examples: [
@@ -62,7 +62,7 @@ const saveDummyFolders = async () => {
     folderId: 'folder02',
   });
   await saveWord('folder02', {
-    wordId: 333,
+    wordId: 3335,
     spelling: 'legitimate',
     meaning: ['정당한', '타당한', '적당한'],
     synonyms: ['appropriate', 'just', 'valid', 'logical', 'rational', 'lawful'],
