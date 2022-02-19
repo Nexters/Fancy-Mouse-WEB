@@ -1,50 +1,50 @@
 export const FOLDER_COLORS = [
   {
-    folderId: 'folder01',
+    colorId: 'folder01',
     color: '#3FC7DB',
   },
   {
-    folderId: 'folder02',
+    colorId: 'folder02',
     color: '#72C0FD',
   },
   {
-    folderId: 'folder03',
+    colorId: 'folder03',
     color: '#91A6FC',
   },
   {
-    folderId: 'folder04',
+    colorId: 'folder04',
     color: '#B196FD',
   },
   {
-    folderId: 'folder05',
+    colorId: 'folder05',
     color: '#E499F6',
   },
   {
-    folderId: 'folder06',
+    colorId: 'folder06',
     color: '#F5A5C2',
   },
   {
-    folderId: 'folder07',
+    colorId: 'folder07',
     color: '#FC8888',
   },
   {
-    folderId: 'folder08',
+    colorId: 'folder08',
     color: '#FFC177',
   },
   {
-    folderId: 'folder09',
+    colorId: 'folder09',
     color: '#FFE475',
   },
   {
-    folderId: 'folder10',
+    colorId: 'folder10',
     color: '#BEDB84',
   },
   {
-    folderId: 'folder11',
+    colorId: 'folder11',
     color: '#74DAA9',
   },
   {
-    folderId: 'folder00',
+    colorId: 'folder00',
     color: '#BFCDDE',
   },
 ];

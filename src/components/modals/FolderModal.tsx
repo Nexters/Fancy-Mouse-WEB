@@ -7,9 +7,9 @@ import { FOLDER_COLORS } from '@/components/modals/constants';
 import { FolderContext } from '@/contexts/FolderContext';
 import { ModalContext } from '@/contexts/ModalContext';
 import styled from '@emotion/styled';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import tw from 'twin.macro';
-import { saveFolder } from '../../utils/firebase';
+import { saveFolder } from '@/utils/firebase';
 
 const Wrapper = styled.div`
   ${tw`flex flex-col w-full p-6`}
@@ -60,8 +60,8 @@ const ButtonGroup = styled.div`
 `;
 
 const ColorItem = (folder, hoveredId, selectedId) => {
-  if (folder.folderId === selectedId) return <CircleSelect color={folder.color} />;
-  else if (folder.folderId === hoveredId) return <CircleHover color={folder.color} />;
+  if (folder.colorId === selectedId) return <CircleSelect color={folder.color} />;
+  else if (folder.colorId === hoveredId) return <CircleHover color={folder.color} />;
 
   return <CircleDefault color={folder.color} />;
 };
@@ -73,26 +73,30 @@ const FolderModal = () => {
     handleModal();
     selectFolder({} as FolderModel);
   };
-  const [hoveredFolderId, setHoveredFolderId] = useState<string>('');
-  const [selectedFolderId, setSelectedFolderId] = useState<string>('');
+  const [hoveredColorId, setHoveredColorId] = useState<string>('');
+  const [selectedColorId, setSelectedColorId] = useState<string>('');
 
   const handleTitleInput = (e) => {
     setFolderName(e.target.value);
   };
 
   const handleMouseEvent = (hoveredId: string) => {
-    setHoveredFolderId(hoveredId);
+    setHoveredColorId(hoveredId);
   };
   const handleClick = (selectedId: string) => {
-    setSelectedFolderId(selectedId);
+    setSelectedColorId(selectedId);
     setFolderColor(selectedId);
   };
 
   const handleClickSave = () => {
+    saveFolder(selectedFolder.folderId, selectedFolder.folderName, selectedFolder.color);
     handleModal();
     selectFolder({} as FolderModel);
-    saveFolder(selectedFolderId, selectedFolder.folderName, selectedFolder.color);
   };
+
+  useEffect(() => {
+    if (selectedFolder) setSelectedColorId(selectedFolder.color);
+  }, [selectedFolder]);
 
   return (
     <Wrapper>
@@ -108,17 +112,17 @@ const FolderModal = () => {
       />
       <SubTitle>폴더 색상</SubTitle>
       <ColorList>
-        {FOLDER_COLORS.map((folder: { color: string; folderId: string }) => {
+        {FOLDER_COLORS.map((color: { color: string; colorId: string }) => {
           return (
             <li
-              key={folder.folderId}
-              onMouseEnter={() => handleMouseEvent(folder.folderId)}
+              key={color.colorId}
+              onMouseEnter={() => handleMouseEvent(color.colorId)}
               onMouseLeave={() => handleMouseEvent('')}
-              onClick={() => handleClick(folder.folderId)}
-              id={folder.folderId}
+              onClick={() => handleClick(color.colorId)}
+              id={color.colorId}
               className="folder-item"
             >
-              {ColorItem(folder, hoveredFolderId, selectedFolderId)}
+              {ColorItem(color, hoveredColorId, selectedColorId)}
             </li>
           );
         })}
