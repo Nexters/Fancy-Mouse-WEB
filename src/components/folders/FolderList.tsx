@@ -102,7 +102,7 @@ const FolderList = () => {
 
   return folderList?.length ? (
     <FolderListWrapper>
-      {folderList.map((d) => (
+      {folderList?.map((d) => (
         <Folder key={d.folderId} folder={d} />
       ))}
     </FolderListWrapper>

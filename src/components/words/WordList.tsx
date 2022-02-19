@@ -41,9 +41,9 @@ const WordList = () => {
     return <></>;
   }
 
-  return wordList.length ? (
+  return wordList?.length ? (
     <WordListWrapper>
-      {wordList.map((d) => (
+      {wordList?.map((d) => (
         <Word key={d.wordId} word={d} />
       ))}
     </WordListWrapper>
