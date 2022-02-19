@@ -1,6 +1,6 @@
 import { child, get, getDatabase, ref, set } from 'firebase/database';
-import { FolderModel } from '../components/folders/type';
-import { WordModel } from '../components/words/type';
+import { FolderModel } from '@/components/folders/type';
+import { WordModel } from '@/components/words/type';
 
 export const findAllFolders = async (): Promise<FolderModel[]> => {
   const dbRef = ref(getDatabase());
@@ -21,12 +21,12 @@ export const saveFolder = async (folderId: string, folderName: string, color: st
     color,
     wordList: [],
   };
-  set(ref(db, `users/uuid/folders/${newFolderId}`), folder);
+  await set(ref(db, `users/uuid/folders/${newFolderId}`), folder);
 };
 
 export const deleteFolder = async (folderId: string) => {
   const db = getDatabase();
-  set(ref(db, `users/uuid/folders/${folderId}`), null);
+  await set(ref(db, `users/uuid/folders/${folderId}`), null);
 };
 
 export const findWordsByFolderId = async (folderId: string) => {
@@ -37,12 +37,12 @@ export const findWordsByFolderId = async (folderId: string) => {
   }
 };
 
-export const findAllWords = async () => {
+export const findAllWords = async (): Promise<WordModel[]> => {
   const dbRef = ref(getDatabase());
   const snapshot = await get(child(dbRef, `users/uuid/folders`));
   if (snapshot.exists()) {
-    const folders = Object.values(snapshot.val());
-    let words = [];
+    const folders: FolderModel[] = Object.values(snapshot.val());
+    const words: WordModel[] = [];
     for (const folder of folders) {
       words.push(...folder.wordList);
     }
@@ -57,6 +57,7 @@ export const findAllWords = async () => {
     });
     return words;
   }
+  return [];
 };
 
 export const saveWord = async (folderId: string, word: WordModel) => {
@@ -79,7 +80,7 @@ export const updateWordMemo = async (folderId: string, wordId: number, memo: str
         word.memo = memo;
       }
     });
-    set(ref(db, `users/uuid/folders/${folderId}/wordList`), updatedWords);
+    await set(ref(db, `users/uuid/folders/${folderId}/wordList`), updatedWords);
   }
   return;
 };
@@ -91,6 +92,6 @@ export const deleteWord = async (folderId: string, wordId: number) => {
     const filteredWords = words.filter((item) => {
       return item.wordId != wordId;
     });
-    set(ref(db, `users/uuid/folders/${folderId}/wordList`), filteredWords);
+    await set(ref(db, `users/uuid/folders/${folderId}/wordList`), filteredWords);
   }
 };

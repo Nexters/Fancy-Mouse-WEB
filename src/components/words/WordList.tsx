@@ -2,8 +2,9 @@ import Fallback from '@/components/fallback';
 import Word from '@/components/words/Word';
 import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
-import { findAllWords, findWordsByFolderId } from '../../utils/firebase';
+import { findAllWords, findWordsByFolderId } from '@/utils/firebase';
 import { WordModel } from './type';
+import { useRouter } from 'next/router';
 
 const WordListWrapper = styled.ul`
   display: grid;
@@ -17,21 +18,27 @@ const WordListWrapper = styled.ul`
 const WordList = () => {
   const [wordList, setWordList] = useState<WordModel[]>([]);
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  const fetchData = async () => {
+    let data: WordModel[] = [];
+    if (router.query.folderId) {
+      data = await findWordsByFolderId(router.query.folderId as string);
+    } else {
+      data = await findAllWords();
+    }
+    setWordList(data);
+    setLoading(false);
+  };
 
   useEffect(() => {
+    if (!router.isReady) return;
     setLoading(true);
-    const fetchData = async () => {
-      // TODO : fodlerId 받아오기
-      await findAllWords();
-      const data = await findWordsByFolderId('folder01');
-      setWordList(data);
-      setLoading(false);
-    };
     fetchData();
-  }, []);
+  }, [router.isReady]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <></>;
   }
 
   return wordList.length ? (

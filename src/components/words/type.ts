@@ -1,10 +1,10 @@
 export interface WordModel {
   wordId: number;
-  spelling?: string;
+  spelling: string;
   meaning?: string[];
   synonyms?: string[];
   examples?: string[];
   memo?: string;
-  createdAt?: number;
+  createdAt: number;
   folderId: string;
 }
