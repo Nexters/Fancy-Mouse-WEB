@@ -5,6 +5,8 @@ import BtnTrash from '@assets/icons/btn_trash.svg';
 import { useContext } from 'react';
 import { ModalContext } from '@/contexts/ModalContext';
 import { MODAL_TYPE } from '@/components/modals/type';
+import { FolderModel } from '@/components/folders/type';
+import { FolderContext } from '@/contexts/FolderContext';
 
 const Wrapper = styled.div`
   position: relative;
@@ -39,16 +41,18 @@ const ListItem = styled.li`
   }
 `;
 
-const FolderMenu = () => {
+const FolderMenu = ({ selectedFolder }: { selectedFolder: FolderModel }) => {
   const { handleModal } = useContext(ModalContext);
+  const { selectFolder } = useContext(FolderContext);
   const handleClickDelete = (e) => {
     //TODO: 삭제 API 연동
     e.stopPropagation();
+    selectFolder(selectedFolder);
     handleModal(MODAL_TYPE.DELETE);
   };
   const handleClickEdit = (e) => {
-    //TODO: (시연) 수정 API 연동
     e.stopPropagation();
+    selectFolder(selectedFolder);
     handleModal(MODAL_TYPE.FOLDER);
   };
   return (

@@ -7,6 +7,8 @@ import CircleDefault from '@/assets/icons/IcCircleDefault';
 import CircleHover from '@/assets/icons/IcCircleHover';
 import CircleSelect from '@/assets/icons/IcCircleCheck';
 import { FOLDER_COLORS } from '@/components/modals/constants';
+import { FolderContext } from '@/contexts/FolderContext';
+import { FolderModel } from '@/components/folders/type';
 
 const Wrapper = styled.div`
   ${tw`flex flex-col w-full p-6`}
@@ -65,28 +67,46 @@ const ColorItem = (folder, hoveredId, selectedId) => {
 
 const FolderModal = () => {
   const { handleModal } = useContext(ModalContext);
+  const { selectFolder, selectedFolder, setFolderName, setFolderColor } = useContext(FolderContext);
   const handleClickClose = () => {
     handleModal();
+    selectFolder({} as FolderModel);
   };
   const [hoveredFolderId, setHoveredFolderId] = useState<string>('');
   const [selectedFolderId, setSelectedFolderId] = useState<string>('');
+
+  const handleTitleInput = (e) => {
+    setFolderName(e.target.value);
+  };
+
   const handleMouseEvent = (hoveredId: string) => {
     setHoveredFolderId(hoveredId);
   };
   const handleClick = (selectedId: string) => {
     setSelectedFolderId(selectedId);
+    setFolderColor(selectedId);
   };
 
   const handleClickSave = () => {
     //TODO: API 연동
-    //TODO: 선택한 폴더 id, 이름, 색상 추가하기
+    //보낼 값: selectedFolder에서 보내면 됨!!!
+    //selectedFolder.folderId, selectedFolder.folderName, selectedFolder.color, selectedFolder.wordList
+    handleModal();
+    selectFolder({} as FolderModel);
   };
 
   return (
     <Wrapper>
       <Title>새로운 폴더 만들기</Title>
       <SubTitle>폴더명</SubTitle>
-      <FolderTitleInput type="text" minLength={1} maxLength={8} placeholder="폴더명을 입력하세요" />
+      <FolderTitleInput
+        type="text"
+        value={selectedFolder.folderName ?? ''}
+        onChange={handleTitleInput}
+        minLength={1}
+        maxLength={8}
+        placeholder="폴더명을 입력하세요"
+      />
       <SubTitle>폴더 색상</SubTitle>
       <ColorList>
         {FOLDER_COLORS.map((folder: { color: string; folderId: string }) => {

@@ -32,7 +32,7 @@ const FolderItem = ({ folder }: { folder: FolderModel }) => {
   };
   const handleClickMenu = (e) => {
     e.stopPropagation();
-    setIsVisible(true);
+    if (folder) setIsVisible(true);
   };
   return (
     <Wrapper onClick={() => handleClickFolder()}>
@@ -41,7 +41,7 @@ const FolderItem = ({ folder }: { folder: FolderModel }) => {
         <BtnMenu className="btn-menu" onClick={handleClickMenu} />
         {isVisible && (
           <div ref={ref}>
-            <FolderMenu />
+            <FolderMenu selectedFolder={folder} />
           </div>
         )}
       </div>

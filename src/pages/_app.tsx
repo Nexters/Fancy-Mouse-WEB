@@ -8,6 +8,7 @@ import styled from '@emotion/styled';
 import { ModalProvider } from '@/contexts/ModalContext';
 import { WordProvider } from '@/contexts/WordContext';
 import { initializeApp } from 'firebase/app';
+import { FolderProvider } from '@/contexts/FolderContext';
 
 const Container = styled.div`
   max-width: 960px;
@@ -38,13 +39,15 @@ function App({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <ReactQueryDevtools initialIsOpen={false} />
-          <WordProvider>
-            <ModalProvider>
-              <Container>
-                <Component {...pageProps} />
-              </Container>
-            </ModalProvider>
-          </WordProvider>
+          <FolderProvider>
+            <WordProvider>
+              <ModalProvider>
+                <Container>
+                  <Component {...pageProps} />
+                </Container>
+              </ModalProvider>
+            </WordProvider>
+          </FolderProvider>
         </Hydrate>
       </QueryClientProvider>
     </>
