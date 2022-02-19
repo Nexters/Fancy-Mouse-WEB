@@ -2,12 +2,13 @@ import { child, get, getDatabase, ref, set } from 'firebase/database';
 import { FolderModel } from '../components/folders/type';
 import { WordModel } from '../components/words/type';
 
-export const findAllFolders = async () => {
+export const findAllFolders = async (): Promise<FolderModel[]> => {
   const dbRef = ref(getDatabase());
   const snapshot = await get(child(dbRef, `users/uuid/folders`));
   if (snapshot.exists()) {
-    return Object.values(snapshot.val());
+    return Object.values(snapshot.val()) as FolderModel[];
   }
+  return [];
 };
 
 export const saveFolder = async (folderId: string, folderName: string, color: string) => {

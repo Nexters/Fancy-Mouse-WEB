@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
 import tw from 'twin.macro';
 import { findAllFolders, saveFolder, saveWord } from '../../utils/firebase';
+import { FolderModel } from './type';
 
 const saveDummyFolders = async () => {
   await saveFolder('folder01', '폴더1', 'folder01');
@@ -111,7 +112,7 @@ const FolderListWrapper = styled.ul`
 `;
 
 const FolderList = () => {
-  const [folderList, setFolderList] = useState([]);
+  const [folderList, setFolderList] = useState<FolderModel[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
