@@ -5,6 +5,7 @@ import tw from 'twin.macro';
 import Button from '@/components/buttons/Button';
 import { ModalContext } from '@/contexts/ModalContext';
 import { BtnEdit, BtnTrash } from '@/assets/icons';
+import { deleteWord, updateWordMemo } from '../../utils/firebase';
 
 const Wrapper = styled.div`
   width: 30rem;
@@ -115,14 +116,14 @@ const WordModal = () => {
   const [memo, setMemo] = useState<string>(selectedWord?.memo ?? '');
   const handleClickDelete = () => {
     console.log('delete');
-    //TODO: API 연동 (단어 삭제)
+    deleteWord(selectedWord.folderId, selectedWord.wordId);
   };
   const handleClickEdit = () => {
     setIsEditMode(true);
   };
   const handleClickSave = () => {
     setIsEditMode(false);
-    //TODO: API 연동 (단어 내부에 메모 수정)
+    updateWordMemo(selectedWord.folderId, selectedWord.wordId, memo);
   };
   const handleClickClose = () => {
     handleModal();
@@ -142,7 +143,7 @@ const WordModal = () => {
       </ModalHeader>
       <WordDesc>
         {selectedWord?.meaning}
-        {selectedWord?.meaning_en}
+        {/* {selectedWord?.meaning_en} */}
       </WordDesc>
       <Sentence>
         <span className="sentence-title">함께 저장한 문장</span>

@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
-import styled from '@emotion/styled';
 import Button from '@/components/buttons/Button';
-import { ModalContext } from '@/contexts/ModalContext';
-import tw from 'twin.macro';
 import { FolderModel } from '@/components/folders/type';
 import { FolderContext } from '@/contexts/FolderContext';
+import { ModalContext } from '@/contexts/ModalContext';
+import styled from '@emotion/styled';
+import React, { useContext } from 'react';
+import tw from 'twin.macro';
+import { deleteFolder } from '../../utils/firebase';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -25,15 +26,13 @@ const ButtonGroup = styled.div`
 `;
 const DeleteModal = () => {
   const { handleModal } = useContext(ModalContext);
-  const { selectFolder } = useContext(FolderContext); //selectedFolder도 여기에서 가져올 수 있음
+  const { selectFolder, selectedFolder } = useContext(FolderContext); //selectedFolder도 여기에서 가져올 수 있음
   const handleClickClose = () => {
     handleModal();
     selectFolder({} as FolderModel);
   };
   const handleClickDelete = () => {
-    //TODO: 삭제 API 연동
-    console.log('delete');
-    // selectedFolder 기반으로 삭제
+    deleteFolder(selectedFolder.folderId);
     handleModal();
     selectFolder({} as FolderModel);
   };
