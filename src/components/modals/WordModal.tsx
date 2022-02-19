@@ -5,6 +5,7 @@ import tw from 'twin.macro';
 import Button from '@/components/buttons/Button';
 import { ModalContext } from '@/contexts/ModalContext';
 import { BtnEdit, BtnTrash } from '@/assets/icons';
+import { deleteWord } from '../../utils/firebase';
 
 const Wrapper = styled.div`
   width: 30rem;
@@ -115,6 +116,7 @@ const WordModal = () => {
   const [memo, setMemo] = useState<string>(selectedWord?.memo ?? '');
   const handleClickDelete = () => {
     console.log('delete');
+    deleteWord('folder01', 123);
     //TODO: API 연동 (단어 삭제)
   };
   const handleClickEdit = () => {

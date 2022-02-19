@@ -46,3 +46,19 @@ export const saveWord = async (folderId: string, word: WordModel) => {
   }
   set(ref(db, `users/uuid/folders/${folderId}/wordList`), words);
 };
+
+export const deleteWord = async (folderId: string, wordId: number) => {
+  const db = getDatabase();
+  const words = await findWordsByFolderId(folderId);
+  if (words) {
+    console.log(words);
+    const filteredWords = words.filter((item) => {
+      console.log(item.wordId);
+      console.log(wordId);
+      return item.wordId != wordId;
+    });
+    console.log('걸러진 words');
+    console.log(filteredWords);
+    set(ref(db, `users/uuid/folders/${folderId}/wordList`), filteredWords);
+  }
+};

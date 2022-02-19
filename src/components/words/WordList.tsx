@@ -21,6 +21,8 @@ const WordList = () => {
   useEffect(() => {
     setLoading(true);
     const fetchData = async () => {
+      // TODO : fodlerId 받아오기
+      console.log('aaaaaaaaa');
       const data = await findWordsByFolderId('folder01');
       setWordList(data);
       setLoading(false);
