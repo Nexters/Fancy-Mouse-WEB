@@ -11,6 +11,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import tw from 'twin.macro';
 import { saveFolder, updateFolderNameAndFolderColor } from '@/utils/firebase';
 import { useMutation, useQueryClient } from 'react-query';
+import { useRouter } from 'next/router';
 
 const Wrapper = styled.div`
   ${tw`flex flex-col w-full p-6`}
@@ -72,6 +73,7 @@ const FolderModal = () => {
   const { handleModal } = useContext(ModalContext);
   const { selectFolder, selectedFolder, setFolderName, setFolderColor } = useContext(FolderContext);
   const queryClient = useQueryClient();
+  const router = useRouter();
 
   const createFolder = () => {
     return saveFolder(selectedFolder.folderName, selectedFolder.color);
@@ -96,7 +98,8 @@ const FolderModal = () => {
   const updateMutation = useMutation(updateFolder, {
     onSuccess: () => {
       handleModal();
-      selectFolder({} as FolderModel);
+      if (router.query?.folderId === undefined) selectFolder({} as FolderModel);
+
       return queryClient.invalidateQueries('folders');
     },
   });

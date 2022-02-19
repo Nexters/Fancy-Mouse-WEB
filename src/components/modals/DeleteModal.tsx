@@ -6,6 +6,8 @@ import styled from '@emotion/styled';
 import React, { useContext } from 'react';
 import tw from 'twin.macro';
 import { deleteFolder } from '../../utils/firebase';
+import { useMutation, useQueryClient } from 'react-query';
+import { useRouter } from 'next/router';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -26,16 +28,37 @@ const ButtonGroup = styled.div`
 `;
 const DeleteModal = () => {
   const { handleModal } = useContext(ModalContext);
-  const { selectFolder, selectedFolder } = useContext(FolderContext); //selectedFolder도 여기에서 가져올 수 있음
+  const { selectFolder, selectedFolder } = useContext(FolderContext);
+  const queryClient = useQueryClient();
+  const router = useRouter();
+
+  const deleteFolderApi = () => {
+    return deleteFolder(selectedFolder.folderId);
+  };
+
+  const mutation = useMutation(deleteFolderApi, {
+    onSuccess: () => {
+      handleModal();
+      selectFolder({} as FolderModel);
+      return queryClient.invalidateQueries('folders');
+    },
+  });
+
   const handleClickClose = () => {
     handleModal();
     selectFolder({} as FolderModel);
   };
   const handleClickDelete = () => {
-    deleteFolder(selectedFolder.folderId);
+    mutation.mutate();
     handleModal();
     selectFolder({} as FolderModel);
+    if (router.query.folderId) {
+      router.push({
+        pathname: '/folder',
+      });
+    }
   };
+
   return (
     <Wrapper>
       <Title>이 폴더를 정말 삭제하시겠어요?</Title>
