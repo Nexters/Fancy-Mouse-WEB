@@ -20,6 +20,7 @@ const Header = styled.section`
 const ButtonWrapper = styled.p`
   display: inherit;
   gap: 0.5rem;
+  cursor: pointer;
 `;
 
 const FolderListPage = () => {

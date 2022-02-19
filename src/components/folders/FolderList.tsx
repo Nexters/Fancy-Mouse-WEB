@@ -3,12 +3,10 @@ import Folder from '@/components/folders/Folder';
 import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
 import tw from 'twin.macro';
-import { findAllFolders, saveFolder, saveWord } from '../../utils/firebase';
+import { findAllFolders, saveWord } from '@/utils/firebase';
 import { FolderModel } from './type';
 
 const saveDummyFolders = async () => {
-  await saveFolder('folder01', '폴더1', 'folder01');
-  await saveFolder('folder02', '폴더2', 'folder02');
   await saveWord('folder01', {
     spelling: 'provide',
     wordId: 123,

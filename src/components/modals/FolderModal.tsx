@@ -9,7 +9,7 @@ import { ModalContext } from '@/contexts/ModalContext';
 import styled from '@emotion/styled';
 import React, { useContext, useEffect, useState } from 'react';
 import tw from 'twin.macro';
-import { saveFolder } from '@/utils/firebase';
+import { saveFolder, updateFolderNameAndFolderColor } from '@/utils/firebase';
 
 const Wrapper = styled.div`
   ${tw`flex flex-col w-full p-6`}
@@ -89,7 +89,13 @@ const FolderModal = () => {
   };
 
   const handleClickSave = () => {
-    saveFolder(selectedFolder.folderId, selectedFolder.folderName, selectedFolder.color);
+    saveFolder(selectedFolder.folderName, selectedFolder.color);
+    handleModal();
+    selectFolder({} as FolderModel);
+  };
+
+  const handleClickEdit = () => {
+    updateFolderNameAndFolderColor(selectedFolder.folderId as string, selectedFolder.folderName, selectedFolder.color);
     handleModal();
     selectFolder({} as FolderModel);
   };
@@ -131,9 +137,15 @@ const FolderModal = () => {
         <Button color={'bg-white'} onClick={handleClickClose} minWidth={'3.875rem'}>
           취소
         </Button>
-        <Button color={'bg-primary'} onClick={handleClickSave} minWidth={'4.8rem'}>
-          <span className="text-white">만들기</span>
-        </Button>
+        {selectedFolder.folderId ? (
+          <Button color={'bg-primary'} onClick={handleClickEdit} minWidth={'4.8rem'}>
+            <span className="text-secondary">수정 완료</span>
+          </Button>
+        ) : (
+          <Button color={'bg-primary'} onClick={handleClickSave} minWidth={'4.8rem'}>
+            <span className="text-secondary">만들기</span>
+          </Button>
+        )}
       </ButtonGroup>
     </Wrapper>
   );
