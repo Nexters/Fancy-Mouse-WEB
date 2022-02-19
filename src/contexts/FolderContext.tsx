@@ -6,13 +6,15 @@ interface FolderContextState {
   selectFolder: (folder: FolderModel) => void;
   setFolderName: (folderName: string) => void;
   setFolderColor: (folderColor: string) => void;
+  saveFolderList: (newList: FolderModel[]) => void;
+  folderList: FolderModel[];
 }
 
 export const FolderContext = createContext<FolderContextState>({} as FolderContextState);
 
 export const FolderProvider = ({ children }: { children: ReactNode }) => {
   const [selectedFolder, setSelectedFolder] = React.useState<FolderModel>({} as FolderModel);
-
+  const [folderList, setFolderList] = React.useState<FolderModel[]>([] as FolderModel[]);
   const selectFolder = (folder: FolderModel) => {
     setSelectedFolder(folder);
   };
@@ -25,8 +27,14 @@ export const FolderProvider = ({ children }: { children: ReactNode }) => {
     setSelectedFolder({ ...selectedFolder, color: folderColor });
   };
 
+  const saveFolderList = (newList: FolderModel[]) => {
+    setFolderList([...newList]);
+  };
+
   return (
-    <FolderContext.Provider value={{ selectedFolder, selectFolder, setFolderName, setFolderColor }}>
+    <FolderContext.Provider
+      value={{ selectedFolder, selectFolder, setFolderName, setFolderColor, saveFolderList, folderList }}
+    >
       {children}
     </FolderContext.Provider>
   );

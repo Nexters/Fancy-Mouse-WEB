@@ -5,7 +5,6 @@ import { findAllWords, findWordsByFolderId } from '@/utils/firebase';
 import { WordModel } from './type';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
-import useMounted from '@/hooks/useMounted';
 
 const WordListWrapper = styled.ul`
   display: grid;
@@ -47,4 +46,5 @@ const WordList = () => {
     <Fallback isWord />
   );
 };
+
 export default WordList;

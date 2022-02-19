@@ -7,6 +7,8 @@ import { ModalContext } from '@/contexts/ModalContext';
 import { BtnEdit, BtnTrash } from '@/assets/icons';
 import { deleteWord, updateWordMemo } from '@/utils/firebase';
 import dayjs from 'dayjs';
+import { useFolderIdFormatter } from '@/hooks/useFolderIdFormatter';
+import { useFolderIcon } from '@/hooks/useFolderIcon';
 
 const Wrapper = styled.div`
   width: 30rem;
@@ -23,11 +25,12 @@ const ModalHeader = styled.section`
   padding-left: 0.5rem;
 
   .folder {
-    ${tw`text-gray-60 p-2 items-center`}
+    ${tw`text-gray-60 p-2 items-center flex flex-row`}
     height: 2rem;
     font-size: 0.75rem;
     line-height: 0.9375rem;
     margin-bottom: 1rem;
+    gap: 0.25rem;
   }
 
   .spelling {
@@ -134,17 +137,17 @@ const WordModal = () => {
   return (
     <Wrapper>
       <ModalHeader>
-        <span className="folder">{selectedWord?.folderId}</span>
+        <span className="folder">
+          {useFolderIcon(useFolderIdFormatter(selectedWord?.folderId).color)}
+          {useFolderIdFormatter(selectedWord?.folderId).name}
+        </span>
         <span className="spelling">{selectedWord?.spelling}</span>
         <p>
           <span className="created-text">저장한 일시</span>
           <span className="created-date">{dayjs(selectedWord?.createdAt).format('YYYY-MM-DD')}</span>
         </p>
       </ModalHeader>
-      <WordDesc>
-        {selectedWord?.meaning}
-        {/* {selectedWord?.meaning_en} */}
-      </WordDesc>
+      <WordDesc>{selectedWord?.meaning}</WordDesc>
       <Sentence>
         <span className="sentence-title">함께 저장한 문장</span>
         문장문장

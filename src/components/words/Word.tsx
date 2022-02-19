@@ -6,6 +6,8 @@ import { MODAL_TYPE } from '@/components/modals/type';
 import { ModalContext } from '@/contexts/ModalContext';
 import { useWordContext } from '@/contexts/WordContext';
 import dayjs from 'dayjs';
+import { useFolderIdFormatter } from '@/hooks/useFolderIdFormatter';
+import { useFolderIcon } from '@/hooks/useFolderIcon';
 
 const Wrapper = styled.li`
   ${tw`bg-white/40`}
@@ -24,12 +26,13 @@ const Wrapper = styled.li`
 `;
 
 const WordHeader = styled.span`
-  ${tw`flex justify-between text-gray-60 items-center`}
+  ${tw`flex text-gray-60 items-center`}
   font-size: 0.75rem;
   border-radius: 0.5rem;
   margin-left: 1.5rem;
   margin-bottom: 1rem;
   margin-top: 1rem;
+  gap: 0.25rem;
 `;
 
 const WordSpelling = styled.span`
@@ -74,7 +77,10 @@ const WordItem = ({ word }: { word: WordModel }) => {
 
   return (
     <Wrapper onClick={() => handleClickWord()}>
-      <WordHeader>{word.folderId}</WordHeader>
+      <WordHeader>
+        {useFolderIcon(useFolderIdFormatter(word.folderId).color)}
+        {useFolderIdFormatter(word.folderId).name}
+      </WordHeader>
       <WordSpelling>{word.spelling}</WordSpelling>
       <WordDesc>{word.meaning}</WordDesc>
       <WordDate>

@@ -1,14 +1,14 @@
 import Fallback from '@/components/fallback';
 import Folder from '@/components/folders/Folder';
 import styled from '@emotion/styled';
-import { useEffect, useState } from 'react';
 import tw from 'twin.macro';
 import { findAllFolders, saveWord } from '@/utils/firebase';
 import { FolderModel } from './type';
 import { useQuery } from 'react-query';
+import { useFolderContext } from '@/contexts/FolderContext';
 
 const saveDummyFolders = async () => {
-  await saveWord('-MwHM5UFPUC13Xi8BVXJ', {
+  await saveWord('-MwHN41rMks_CFnZmSns', {
     spelling: 'provide',
     wordId: 123,
     meaning: ['제공하다', '주다'],
@@ -19,7 +19,7 @@ const saveDummyFolders = async () => {
     ],
     memo: '테스트 메모',
     createdAt: Date.now(),
-    folderId: 'folder01',
+    folderId: '-MwHN41rMks_CFnZmSns',
   });
 };
 
