@@ -7,6 +7,20 @@ import React, { useContext, useEffect } from 'react';
 import { ModalContext } from '@/contexts/ModalContext';
 import { FolderContext } from '@/contexts/FolderContext';
 import { FolderModel } from '@/components/folders/type';
+import styled from '@emotion/styled';
+import tw from 'twin.macro';
+import { BtnAdd } from '@/assets/icons';
+
+const Header = styled.section`
+  ${tw`flex justify-between`}
+  font-size: 1rem;
+  line-height: 1.25rem;
+`;
+
+const ButtonWrapper = styled.p`
+  display: inherit;
+  gap: 0.5rem;
+`;
 
 const FolderListPage = () => {
   const { handleModal } = React.useContext(ModalContext);
@@ -18,14 +32,19 @@ const FolderListPage = () => {
     selectFolder({} as FolderModel);
   }, []);
   return (
-    <div>
+    <>
       <GNB />
       <Layout>
-        <ListCounter count={0} isWord={false} />
-        <button onClick={() => handleClickFolder()}>폴더 추가하기</button>
+        <Header>
+          <ListCounter count={0} isWord={false} />
+          <ButtonWrapper onClick={() => handleClickFolder()}>
+            <BtnAdd />
+            폴더 추가하기
+          </ButtonWrapper>
+        </Header>
         <FolderList />
       </Layout>
-    </div>
+    </>
   );
 };
 
