@@ -2,7 +2,7 @@ import Fallback from '@/components/fallback';
 import Word from '@/components/words/Word';
 import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
-import { findWordsByFolderId } from '../../utils/firebase';
+import { findAllWords, findWordsByFolderId } from '../../utils/firebase';
 import { WordModel } from './type';
 
 const WordListWrapper = styled.ul`
@@ -22,7 +22,7 @@ const WordList = () => {
     setLoading(true);
     const fetchData = async () => {
       // TODO : fodlerId 받아오기
-      console.log('aaaaaaaaa');
+      await findAllWords();
       const data = await findWordsByFolderId('folder01');
       setWordList(data);
       setLoading(false);

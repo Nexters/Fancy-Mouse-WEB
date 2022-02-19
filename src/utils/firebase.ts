@@ -37,6 +37,28 @@ export const findWordsByFolderId = async (folderId: string) => {
   }
 };
 
+export const findAllWords = async () => {
+  const dbRef = ref(getDatabase());
+  const snapshot = await get(child(dbRef, `users/uuid/folders`));
+  if (snapshot.exists()) {
+    const folders = Object.values(snapshot.val());
+    let words = [];
+    for (const folder of folders) {
+      words.push(...folder.wordList);
+    }
+    words.sort((a, b) => {
+      if (a.createdAt > b.createdAt) {
+        return -1;
+      }
+      if (a.createdAt < b.createdAt) {
+        return 1;
+      }
+      return 0;
+    });
+    return words;
+  }
+};
+
 export const saveWord = async (folderId: string, word: WordModel) => {
   const db = getDatabase();
   let words = await findWordsByFolderId(folderId);
@@ -48,18 +70,27 @@ export const saveWord = async (folderId: string, word: WordModel) => {
   set(ref(db, `users/uuid/folders/${folderId}/wordList`), words);
 };
 
+export const updateWordMemo = async (folderId: string, wordId: number, memo: string) => {
+  const db = getDatabase();
+  const words = await findWordsByFolderId(folderId);
+  if (words) {
+    const updatedWords = words.map((word) => {
+      if (word.wordId === wordId) {
+        word.memo = memo;
+      }
+    });
+    set(ref(db, `users/uuid/folders/${folderId}/wordList`), updatedWords);
+  }
+  return;
+};
+
 export const deleteWord = async (folderId: string, wordId: number) => {
   const db = getDatabase();
   const words = await findWordsByFolderId(folderId);
   if (words) {
-    console.log(words);
     const filteredWords = words.filter((item) => {
-      console.log(item.wordId);
-      console.log(wordId);
       return item.wordId != wordId;
     });
-    console.log('걸러진 words');
-    console.log(filteredWords);
     set(ref(db, `users/uuid/folders/${folderId}/wordList`), filteredWords);
   }
 };

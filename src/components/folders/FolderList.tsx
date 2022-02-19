@@ -12,10 +12,6 @@ const saveDummyFolders = async () => {
   await saveWord('folder01', {
     spelling: 'provide',
     wordId: 123,
-    meaning_en: [
-      '(vrb) give something useful or necessary to',
-      '(vrb) give what is desired or needed, especially support, food or sustenance',
-    ],
     meaning: ['제공하다', '주다'],
     synonyms: ['hide', 'hat', 'face', 'veil', 'disguise', 'camouflage'],
     examples: [
@@ -23,55 +19,38 @@ const saveDummyFolders = async () => {
       'But mostly the point was to give pleasure and provide finality.',
     ],
     memo: '테스트 메모',
-    createdAt: '2022-02-01T12:23:45',
-    status: 3,
-    folderId: 12,
+    createdAt: Date.now(),
+    folderId: 'folder01',
   });
   await saveWord('folder01', {
     wordId: 333,
     spelling: 'legitimate',
     meaning: ['정당한', '타당한', '적당한'],
-    meaning_en: [
-      '(vrb) make legal',
-      '(vrb) make (an illegitimate child) legitimate; declare the legitimacy of (someone)',
-      '(adj) of marriages and offspring; recognized as lawful',
-    ],
     synonyms: ['appropriate', 'just', 'valid', 'logical', 'rational', 'lawful'],
     examples: [
       'In the meantime, the province magistrate provided supplies to the British.',
       'But mostly the point was to give pleasure and provide finality.',
     ],
     memo: '테스트 메모222',
-    createdAt: '2022-02-02T11:23:45',
-    status: 1,
-    folderId: 14,
+    createdAt: Date.now(),
+    folderId: 'folder01',
   });
   await saveWord('folder01', {
     wordId: 334,
     spelling: 'legitimate',
     meaning: ['정당한', '타당한', '적당한'],
-    meaning_en: [
-      '(vrb) make legal',
-      '(vrb) make (an illegitimate child) legitimate; declare the legitimacy of (someone)',
-      '(adj) of marriages and offspring; recognized as lawful',
-    ],
     synonyms: ['appropriate', 'just', 'valid', 'logical', 'rational', 'lawful'],
     examples: [
       'In the meantime, the province magistrate provided supplies to the British.',
       'But mostly the point was to give pleasure and provide finality.',
     ],
     memo: '테스트 메모222',
-    createdAt: '2022-02-02T11:23:45',
-    status: 1,
-    folderId: 14,
+    createdAt: Date.now(),
+    folderId: 'folder01',
   });
   await saveWord('folder02', {
     spelling: 'provide',
     wordId: 123,
-    meaning_en: [
-      '(vrb) give something useful or necessary to',
-      '(vrb) give what is desired or needed, especially support, food or sustenance',
-    ],
     meaning: ['제공하다', '주다'],
     synonyms: ['hide', 'hat', 'face', 'veil', 'disguise', 'camouflage'],
     examples: [
@@ -79,28 +58,21 @@ const saveDummyFolders = async () => {
       'But mostly the point was to give pleasure and provide finality.',
     ],
     memo: '테스트 메모',
-    createdAt: '2022-02-01T12:23:45',
-    status: 3,
-    folderId: 12,
+    createdAt: Date.now(),
+    folderId: 'folder02',
   });
   await saveWord('folder02', {
     wordId: 333,
     spelling: 'legitimate',
     meaning: ['정당한', '타당한', '적당한'],
-    meaning_en: [
-      '(vrb) make legal',
-      '(vrb) make (an illegitimate child) legitimate; declare the legitimacy of (someone)',
-      '(adj) of marriages and offspring; recognized as lawful',
-    ],
     synonyms: ['appropriate', 'just', 'valid', 'logical', 'rational', 'lawful'],
     examples: [
       'In the meantime, the province magistrate provided supplies to the British.',
       'But mostly the point was to give pleasure and provide finality.',
     ],
     memo: '테스트 메모222',
-    createdAt: '2022-02-02T11:23:45',
-    status: 1,
-    folderId: 14,
+    createdAt: Date.now(),
+    folderId: 'folder02',
   });
 };
 
