@@ -11,6 +11,14 @@ export const findAllFolders = async (): Promise<FolderModel[]> => {
   return [];
 };
 
+export const findFolderById = async (folderId: string) => {
+  const dbRef = ref(getDatabase());
+  const snapshot = await get(child(dbRef, `users/uuid/folders/${folderId}`));
+  if (snapshot.exists()) {
+    return snapshot.val();
+  }
+};
+
 export const saveFolder = async (folderName: string, color: string) => {
   const db = getDatabase();
   const newFolderId = push(child(ref(db), 'users/uuid/folders')).key;
@@ -22,6 +30,16 @@ export const saveFolder = async (folderName: string, color: string) => {
     wordList: [],
   };
   await set(ref(db, `users/uuid/folders/${newFolderId}`), folder);
+};
+
+export const updateFolderNameAndFolderColor = async (folderId: string, folderName: string, color: string) => {
+  const db = getDatabase();
+  const folder = await findFolderById(folderId);
+  if (folder) {
+    folder.folderName = folderName;
+    folder.color = color;
+    await set(ref(db, `users/uuid/folders/${folderId}`), folder);
+  }
 };
 
 export const deleteFolder = async (folderId: string) => {
