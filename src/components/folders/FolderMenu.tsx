@@ -45,7 +45,7 @@ const FolderMenu = ({ selectedFolder }: { selectedFolder: FolderModel }) => {
   const { handleModal } = useContext(ModalContext);
   const { selectFolder } = useContext(FolderContext);
   const handleClickDelete = (e) => {
-    //TODO: 삭제 API 연동
+    //여기는 API 연동이 아닌, 그냥 모달 띄우기만!!
     e.stopPropagation();
     selectFolder(selectedFolder);
     handleModal(MODAL_TYPE.DELETE);
