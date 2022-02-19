@@ -28,6 +28,7 @@ const DeleteModal = () => {
   const { selectFolder } = useContext(FolderContext); //selectedFolder도 여기에서 가져올 수 있음
   const handleClickClose = () => {
     handleModal();
+    selectFolder({} as FolderModel);
   };
   const handleClickDelete = () => {
     //TODO: 삭제 API 연동

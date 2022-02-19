@@ -3,14 +3,20 @@ import Layout from '@/components/layouts';
 import ListCounter from '@/components/layouts/ListCounter';
 import FolderList from '@/components/folders/FolderList';
 import { MODAL_TYPE } from '@/components/modals/type';
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { ModalContext } from '@/contexts/ModalContext';
+import { FolderContext } from '@/contexts/FolderContext';
+import { FolderModel } from '@/components/folders/type';
 
 const FolderListPage = () => {
   const { handleModal } = React.useContext(ModalContext);
+  const { selectFolder } = useContext(FolderContext);
   const handleClickFolder = () => {
     handleModal(MODAL_TYPE.FOLDER);
   };
+  useEffect(() => {
+    selectFolder({} as FolderModel);
+  }, []);
   return (
     <div>
       <GNB />

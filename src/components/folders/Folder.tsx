@@ -5,6 +5,8 @@ import { useRouter } from 'next/router';
 import FolderMenu from '@/components/folders/FolderMenu';
 import BtnMenu from '@assets/icons/btn_menu.svg';
 import useVisible from '@/hooks/useVisible';
+import { useContext } from 'react';
+import { FolderContext } from '@/contexts/FolderContext';
 
 const Wrapper = styled.li`
   ${tw`flex justify-between bg-white/20 p-10 text-gray-70 font-bold items-center`}
@@ -22,6 +24,7 @@ const Wrapper = styled.li`
 `;
 
 const FolderItem = ({ folder }: { folder: FolderModel }) => {
+  const { selectFolder } = useContext(FolderContext);
   const router = useRouter();
   const { ref, isVisible, setIsVisible } = useVisible(false);
   const handleClickFolder = () => {
@@ -29,6 +32,7 @@ const FolderItem = ({ folder }: { folder: FolderModel }) => {
       pathname: '/folder/[folderId]',
       query: { folderId: folder.folderId },
     });
+    selectFolder(folder);
   };
   const handleClickMenu = (e) => {
     e.stopPropagation();
