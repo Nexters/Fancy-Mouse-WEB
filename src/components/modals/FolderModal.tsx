@@ -10,6 +10,7 @@ import styled from '@emotion/styled';
 import React, { useContext, useEffect, useState } from 'react';
 import tw from 'twin.macro';
 import { saveFolder, updateFolderNameAndFolderColor } from '@/utils/firebase';
+import { useMutation, useQueryClient } from 'react-query';
 
 const Wrapper = styled.div`
   ${tw`flex flex-col w-full p-6`}
@@ -70,6 +71,36 @@ const getColor = (folder, hoveredId, selectedId) => {
 const FolderModal = () => {
   const { handleModal } = useContext(ModalContext);
   const { selectFolder, selectedFolder, setFolderName, setFolderColor } = useContext(FolderContext);
+  const queryClient = useQueryClient();
+
+  const createFolder = () => {
+    return saveFolder(selectedFolder.folderName, selectedFolder.color);
+  };
+
+  const updateFolder = () => {
+    return updateFolderNameAndFolderColor(
+      selectedFolder.folderId as string,
+      selectedFolder.folderName,
+      selectedFolder.color,
+    );
+  };
+
+  const createMutation = useMutation(createFolder, {
+    onSuccess: () => {
+      handleModal();
+      selectFolder({} as FolderModel);
+      return queryClient.invalidateQueries('folders');
+    },
+  });
+
+  const updateMutation = useMutation(updateFolder, {
+    onSuccess: () => {
+      handleModal();
+      selectFolder({} as FolderModel);
+      return queryClient.invalidateQueries('folders');
+    },
+  });
+
   const handleClickClose = () => {
     handleModal();
     selectFolder({} as FolderModel);
@@ -90,15 +121,11 @@ const FolderModal = () => {
   };
 
   const handleClickSave = () => {
-    saveFolder(selectedFolder.folderName, selectedFolder.color);
-    handleModal();
-    selectFolder({} as FolderModel);
+    createMutation.mutate();
   };
 
   const handleClickEdit = () => {
-    updateFolderNameAndFolderColor(selectedFolder.folderId as string, selectedFolder.folderName, selectedFolder.color);
-    handleModal();
-    selectFolder({} as FolderModel);
+    updateMutation.mutate();
   };
 
   useEffect(() => {

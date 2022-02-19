@@ -1,10 +1,10 @@
 import Fallback from '@/components/fallback';
 import Word from '@/components/words/Word';
 import styled from '@emotion/styled';
-import { useEffect, useState } from 'react';
 import { findAllWords, findWordsByFolderId } from '@/utils/firebase';
 import { WordModel } from './type';
 import { useRouter } from 'next/router';
+import { useQuery } from 'react-query';
 
 const WordListWrapper = styled.ul`
   display: grid;
@@ -16,10 +16,6 @@ const WordListWrapper = styled.ul`
 `;
 
 const WordList = () => {
-  const [wordList, setWordList] = useState<WordModel[]>([]);
-  const [loading, setLoading] = useState(false);
-  const router = useRouter();
-
   const fetchData = async () => {
     let data: WordModel[] = [];
     if (router.query.folderId) {
@@ -27,23 +23,22 @@ const WordList = () => {
     } else {
       data = await findAllWords();
     }
-    setWordList(data);
-    setLoading(false);
+    return data;
   };
+  const { isLoading, data } = useQuery('words', fetchData);
+  const router = useRouter();
 
-  useEffect(() => {
-    if (!router.isReady) return;
-    setLoading(true);
-    fetchData();
-  }, [router.isReady]);
+  // useEffect(() => {
+  //   if (!router.isReady) return;
+  // }, [router.isReady]);
 
-  if (loading) {
+  if (isLoading) {
     return <></>;
   }
 
-  return wordList?.length ? (
+  return data?.length ? (
     <WordListWrapper>
-      {wordList?.map((d) => (
+      {data?.map((d) => (
         <Word key={d.wordId} word={d} />
       ))}
     </WordListWrapper>

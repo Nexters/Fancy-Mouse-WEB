@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import tw from 'twin.macro';
 import { findAllFolders, saveWord } from '@/utils/firebase';
 import { FolderModel } from './type';
+import { useQuery } from 'react-query';
 
 const saveDummyFolders = async () => {
   await saveWord('folder01', {
@@ -82,27 +83,20 @@ const FolderListWrapper = styled.ul`
 `;
 
 const FolderList = () => {
-  const [folderList, setFolderList] = useState<FolderModel[]>([]);
-  const [loading, setLoading] = useState(false);
+  const fetchData = async () => {
+    const data: FolderModel[] = await findAllFolders();
+    return data;
+  };
 
-  useEffect(() => {
-    setLoading(true);
-    const fetchData = async () => {
-      // await saveDummyFolders();
-      const data = await findAllFolders();
-      setFolderList(data);
-      setLoading(false);
-    };
-    fetchData();
-  }, []);
+  const { isLoading, data } = useQuery('folders', fetchData);
 
-  if (loading) {
-    return <div>Loading...</div>;
+  if (isLoading) {
+    return <></>;
   }
 
-  return folderList?.length ? (
+  return data?.length ? (
     <FolderListWrapper>
-      {folderList?.map((d) => (
+      {data?.map((d) => (
         <Folder key={d.folderId} folder={d} />
       ))}
     </FolderListWrapper>
