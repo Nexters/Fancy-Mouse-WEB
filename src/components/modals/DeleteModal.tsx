@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
-import styled from '@emotion/styled';
 import Button from '@/components/buttons/Button';
-import { ModalContext } from '@/contexts/ModalContext';
-import tw from 'twin.macro';
 import { FolderModel } from '@/components/folders/type';
 import { FolderContext } from '@/contexts/FolderContext';
-import { getDatabase, ref, set } from 'firebase/database';
+import { ModalContext } from '@/contexts/ModalContext';
+import styled from '@emotion/styled';
+import React, { useContext } from 'react';
+import tw from 'twin.macro';
+import { deleteFolder } from '../../utils/firebase';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -27,10 +27,6 @@ const ButtonGroup = styled.div`
 const DeleteModal = () => {
   const { handleModal } = useContext(ModalContext);
   const { selectFolder, selectedFolder } = useContext(FolderContext); //selectedFolder도 여기에서 가져올 수 있음
-  const deleteFolder = async (folderId: string) => {
-    const db = getDatabase();
-    set(ref(db, `users/uuid/folders/${folderId}`), null);
-  };
   const handleClickClose = () => {
     handleModal();
     selectFolder({} as FolderModel);

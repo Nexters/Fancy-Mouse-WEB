@@ -7,9 +7,9 @@ import { FOLDER_COLORS } from '@/components/modals/constants';
 import { FolderContext } from '@/contexts/FolderContext';
 import { ModalContext } from '@/contexts/ModalContext';
 import styled from '@emotion/styled';
-import { getDatabase, ref, set } from 'firebase/database';
 import React, { useContext, useState } from 'react';
 import tw from 'twin.macro';
+import { saveFolder } from '../../utils/firebase';
 
 const Wrapper = styled.div`
   ${tw`flex flex-col w-full p-6`}
@@ -88,23 +88,10 @@ const FolderModal = () => {
     setFolderColor(selectedId);
   };
 
-  const saveFolder = async (folderName: string, color: string) => {
-    const db = getDatabase();
-    const newFolderId = selectedFolderId;
-    const folder: FolderModel = {
-      folderId: newFolderId,
-      createdAt: Date.now(),
-      folderName,
-      color,
-      wordList: [],
-    };
-    set(ref(db, `users/uuid/folders/${newFolderId}`), folder);
-  };
-
   const handleClickSave = () => {
     handleModal();
     selectFolder({} as FolderModel);
-    saveFolder(selectedFolder.folderName, selectedFolder.color);
+    saveFolder(selectedFolderId, selectedFolder.folderName, selectedFolder.color);
   };
 
   return (
