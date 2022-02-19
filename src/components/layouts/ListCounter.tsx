@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import tw from 'twin.macro';
 
 interface Props {
   count: number;
@@ -6,9 +7,9 @@ interface Props {
 }
 
 const Wrapper = styled.span`
-  margin-bottom: 1.5rem;
+  ${tw`text-gray-50`}
   color: #a1abb5;
-  font-size: 1.125rem;
+  font-size: 1rem;
   line-height: 1.5rem;
 `;
 
@@ -16,7 +17,7 @@ const ListCounter = ({ count, isWord }: Props) => {
   return (
     <>
       <Wrapper>
-        총 <span css={{ fontWeight: 'bold', color: '#687280' }}>{count}개</span>
+        총 <span className="font-bold text-primary">{count}개</span>
         {isWord ? ' 단어' : ' 폴더'}가 있어요.
       </Wrapper>
     </>
