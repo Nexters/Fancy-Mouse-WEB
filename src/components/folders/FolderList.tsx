@@ -8,7 +8,7 @@ import { FolderModel } from './type';
 import { useQuery } from 'react-query';
 
 const saveDummyFolders = async () => {
-  await saveWord('folder01', {
+  await saveWord('-MwHM5UFPUC13Xi8BVXJ', {
     spelling: 'provide',
     wordId: 123,
     meaning: ['제공하다', '주다'],
@@ -21,58 +21,6 @@ const saveDummyFolders = async () => {
     createdAt: Date.now(),
     folderId: 'folder01',
   });
-  await saveWord('folder01', {
-    wordId: 333,
-    spelling: 'legitimate',
-    meaning: ['정당한', '타당한', '적당한'],
-    synonyms: ['appropriate', 'just', 'valid', 'logical', 'rational', 'lawful'],
-    examples: [
-      'In the meantime, the province magistrate provided supplies to the British.',
-      'But mostly the point was to give pleasure and provide finality.',
-    ],
-    memo: '테스트 메모222',
-    createdAt: Date.now(),
-    folderId: 'folder01',
-  });
-  await saveWord('folder01', {
-    wordId: 334,
-    spelling: 'legitimate',
-    meaning: ['정당한', '타당한', '적당한'],
-    synonyms: ['appropriate', 'just', 'valid', 'logical', 'rational', 'lawful'],
-    examples: [
-      'In the meantime, the province magistrate provided supplies to the British.',
-      'But mostly the point was to give pleasure and provide finality.',
-    ],
-    memo: '테스트 메모222',
-    createdAt: Date.now(),
-    folderId: 'folder01',
-  });
-  await saveWord('folder02', {
-    spelling: 'provide',
-    wordId: 1234,
-    meaning: ['제공하다', '주다'],
-    synonyms: ['hide', 'hat', 'face', 'veil', 'disguise', 'camouflage'],
-    examples: [
-      'In the meantime, the province magistrate provided supplies to the British.',
-      'But mostly the point was to give pleasure and provide finality.',
-    ],
-    memo: '테스트 메모',
-    createdAt: Date.now(),
-    folderId: 'folder02',
-  });
-  await saveWord('folder02', {
-    wordId: 3335,
-    spelling: 'legitimate',
-    meaning: ['정당한', '타당한', '적당한'],
-    synonyms: ['appropriate', 'just', 'valid', 'logical', 'rational', 'lawful'],
-    examples: [
-      'In the meantime, the province magistrate provided supplies to the British.',
-      'But mostly the point was to give pleasure and provide finality.',
-    ],
-    memo: '테스트 메모222',
-    createdAt: Date.now(),
-    folderId: 'folder02',
-  });
 };
 
 const FolderListWrapper = styled.ul`
@@ -83,6 +31,7 @@ const FolderListWrapper = styled.ul`
 `;
 
 const FolderList = () => {
+  // saveDummyFolders();
   const fetchData = async () => {
     const data: FolderModel[] = await findAllFolders();
     return data;

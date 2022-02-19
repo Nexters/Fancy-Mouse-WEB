@@ -10,6 +10,7 @@ import { FolderModel } from '@/components/folders/type';
 import styled from '@emotion/styled';
 import tw from 'twin.macro';
 import { BtnAdd } from '@/assets/icons';
+import { useQueryClient } from 'react-query';
 
 const Header = styled.section`
   ${tw`flex justify-between`}
@@ -26,6 +27,9 @@ const ButtonWrapper = styled.p`
 const FolderListPage = () => {
   const { handleModal } = React.useContext(ModalContext);
   const { selectFolder } = useContext(FolderContext);
+  const queryClient = useQueryClient();
+  const folders = queryClient.getQueryData('folders') as FolderModel[];
+
   const handleClickFolder = () => {
     handleModal(MODAL_TYPE.FOLDER);
   };
@@ -37,7 +41,7 @@ const FolderListPage = () => {
       <GNB />
       <Layout>
         <Header>
-          <ListCounter count={0} isWord={false} />
+          <ListCounter count={folders?.length} isWord={false} />
           <ButtonWrapper onClick={() => handleClickFolder()}>
             <BtnAdd />
             폴더 추가하기

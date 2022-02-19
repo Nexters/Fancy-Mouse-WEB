@@ -62,7 +62,6 @@ export const findAllWords = async (): Promise<WordModel[]> => {
     const folders: FolderModel[] = Object.values(snapshot.val());
     const words: WordModel[] = [];
     for (const folder of folders) {
-      console.log(folder);
       if (folder.wordList) {
         words.push(...folder.wordList);
       }

@@ -115,7 +115,6 @@ const WordModal = () => {
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
   const [memo, setMemo] = useState<string>(selectedWord?.memo ?? '');
   const handleClickDelete = () => {
-    console.log('delete');
     deleteWord(selectedWord.folderId, selectedWord.wordId);
   };
   const handleClickEdit = () => {

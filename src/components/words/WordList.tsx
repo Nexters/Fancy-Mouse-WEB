@@ -5,6 +5,7 @@ import { findAllWords, findWordsByFolderId } from '@/utils/firebase';
 import { WordModel } from './type';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
+import useMounted from '@/hooks/useMounted';
 
 const WordListWrapper = styled.ul`
   display: grid;
@@ -16,6 +17,7 @@ const WordListWrapper = styled.ul`
 `;
 
 const WordList = () => {
+  const router = useRouter();
   const fetchData = async () => {
     let data: WordModel[] = [];
     if (router.query.folderId) {
@@ -25,8 +27,7 @@ const WordList = () => {
     }
     return data;
   };
-  const { isLoading, data } = useQuery('words', fetchData);
-  const router = useRouter();
+  const { isLoading, data } = useQuery(['words', { folderId: router.query.folderId }], fetchData);
 
   // useEffect(() => {
   //   if (!router.isReady) return;
@@ -39,7 +40,7 @@ const WordList = () => {
   return data?.length ? (
     <WordListWrapper>
       {data?.map((d) => (
-        <Word key={d.wordId} word={d} />
+        <Word key={d.createdAt} word={d} />
       ))}
     </WordListWrapper>
   ) : (

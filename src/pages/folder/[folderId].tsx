@@ -9,6 +9,8 @@ import { FolderContext } from '@/contexts/FolderContext';
 import { MODAL_TYPE } from '@/components/modals/type';
 import { BtnBack, BtnEdit, BtnTrash } from '@/assets/icons';
 import { useRouter } from 'next/router';
+import { WordModel } from '@/components/words/type';
+import { useQueryClient } from 'react-query';
 
 const Header = styled.section`
   ${tw`flex justify-between items-center text-gray-70 font-bold`}
@@ -39,9 +41,10 @@ const FolderDetailPage = () => {
   const { handleModal } = useContext(ModalContext);
   const { selectFolder, selectedFolder } = useContext(FolderContext);
   const router = useRouter();
+  const queryClient = useQueryClient();
+
+  const words = queryClient.getQueryData(['words', { folderId: router.query.folderId }]) as WordModel[];
   const handleClickDelete = (e) => {
-    //여기는 API 연동이 아닌, 그냥 모달 띄우기만!!
-    console.log(selectedFolder);
     e.stopPropagation();
     selectFolder(selectedFolder);
     handleModal(MODAL_TYPE.DELETE);
@@ -70,7 +73,7 @@ const FolderDetailPage = () => {
           </button>
         </div>
       </Header>
-      <ListCounter count={0} isWord />
+      <ListCounter count={words?.length} isWord />
       <WordList />
     </>
   );
