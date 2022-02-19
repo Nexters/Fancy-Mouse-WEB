@@ -5,6 +5,7 @@ import { ModalContext } from '@/contexts/ModalContext';
 import tw from 'twin.macro';
 import { FolderModel } from '@/components/folders/type';
 import { FolderContext } from '@/contexts/FolderContext';
+import { getDatabase, ref, set } from 'firebase/database';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -25,15 +26,17 @@ const ButtonGroup = styled.div`
 `;
 const DeleteModal = () => {
   const { handleModal } = useContext(ModalContext);
-  const { selectFolder } = useContext(FolderContext); //selectedFolder도 여기에서 가져올 수 있음
+  const { selectFolder, selectedFolder } = useContext(FolderContext); //selectedFolder도 여기에서 가져올 수 있음
+  const deleteFolder = async (folderId: string) => {
+    const db = getDatabase();
+    set(ref(db, `users/uuid/folders/${folderId}`), null);
+  };
   const handleClickClose = () => {
     handleModal();
     selectFolder({} as FolderModel);
   };
   const handleClickDelete = () => {
-    //TODO: 삭제 API 연동
-    console.log('delete');
-    // selectedFolder 기반으로 삭제
+    deleteFolder(selectedFolder.folderId);
     handleModal();
     selectFolder({} as FolderModel);
   };

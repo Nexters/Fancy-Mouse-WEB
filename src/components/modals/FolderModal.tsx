@@ -74,7 +74,7 @@ const FolderModal = () => {
     selectFolder({} as FolderModel);
   };
   const [hoveredFolderId, setHoveredFolderId] = useState<string>('');
-  const [selectedFolderId, setSelectedFolderId] = useState<string | null>('');
+  const [selectedFolderId, setSelectedFolderId] = useState<string>('');
 
   const handleTitleInput = (e) => {
     setFolderName(e.target.value);
