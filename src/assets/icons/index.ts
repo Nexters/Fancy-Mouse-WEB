@@ -1,4 +1,5 @@
 export { default as BtnAdd } from './BtnAdd';
+export { default as BtnBack } from './BtnBack';
 export { default as BtnClose } from './BtnClose';
 export { default as BtnEdit } from './BtnEdit';
 export { default as BtnMenu } from './BtnMenu';
@@ -24,4 +25,5 @@ export { default as IcCircleDefault } from './IcCircleDefault';
 export { default as IcCircleHover } from './IcCircleHover';
 export { default as IcToastCom } from './IcToastCom';
 export { default as IcToastError } from './IcToastError';
+export { default as Logo } from './Logo';
 export { default as UserImg } from './UserImg';
