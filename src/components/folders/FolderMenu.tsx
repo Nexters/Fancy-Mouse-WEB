@@ -42,14 +42,20 @@ const ListItem = styled.li`
 const FolderMenu = () => {
   const { handleModal } = useContext(ModalContext);
   const handleClickDelete = (e) => {
+    //TODO: 삭제 API 연동
     e.stopPropagation();
     handleModal(MODAL_TYPE.DELETE);
+  };
+  const handleClickEdit = (e) => {
+    //TODO: (시연) 수정 API 연동
+    e.stopPropagation();
+    handleModal(MODAL_TYPE.FOLDER);
   };
   return (
     <Wrapper>
       <Menu>
         <div className="flex flex-col text-center">
-          <ListItem className="edit">
+          <ListItem className="edit" onClick={handleClickEdit}>
             <BtnEdit className="mr-2" />
             폴더 수정
           </ListItem>

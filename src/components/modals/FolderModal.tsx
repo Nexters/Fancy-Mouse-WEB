@@ -76,6 +76,12 @@ const FolderModal = () => {
   const handleClick = (selectedId: string) => {
     setSelectedFolderId(selectedId);
   };
+
+  const handleClickSave = () => {
+    //TODO: API 연동
+    //TODO: 선택한 폴더 id, 이름, 색상 추가하기
+  };
+
   return (
     <Wrapper>
       <Title>새로운 폴더 만들기</Title>
@@ -102,7 +108,7 @@ const FolderModal = () => {
         <Button color={'bg-white'} onClick={handleClickClose} minWidth={'3.875rem'}>
           취소
         </Button>
-        <Button color={'bg-primary'} onClick={handleClickClose} minWidth={'4.8rem'}>
+        <Button color={'bg-primary'} onClick={handleClickSave} minWidth={'4.8rem'}>
           <span className="text-white">만들기</span>
         </Button>
       </ButtonGroup>

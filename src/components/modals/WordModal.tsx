@@ -115,12 +115,14 @@ const WordModal = () => {
   const [memo, setMemo] = useState<string>(selectedWord?.memo ?? '');
   const handleClickDelete = () => {
     console.log('delete');
+    //TODO: API 연동 (단어 삭제)
   };
   const handleClickEdit = () => {
     setIsEditMode(true);
   };
   const handleClickSave = () => {
     setIsEditMode(false);
+    //TODO: API 연동 (단어 내부에 메모 수정)
   };
   const handleClickClose = () => {
     handleModal();

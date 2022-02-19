@@ -2,7 +2,7 @@ import React, { createContext, ReactNode, useContext } from 'react';
 import { WordModel } from '@/components/words/type';
 
 interface WordContextState {
-  selectedWord: WordModel | null;
+  selectedWord: WordModel;
   selectWord: (word: WordModel) => void;
   setWordMemo: (memo: string) => void;
 }
@@ -10,7 +10,7 @@ interface WordContextState {
 export const WordContext = createContext<WordContextState>({} as WordContextState);
 
 export const WordProvider = ({ children }: { children: ReactNode }) => {
-  const [selectedWord, setSelectedWord] = React.useState<WordModel | null>(null);
+  const [selectedWord, setSelectedWord] = React.useState<WordModel>({} as WordModel);
 
   const selectWord = (word: WordModel) => {
     setSelectedWord(word);
