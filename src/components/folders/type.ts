@@ -1,8 +1,8 @@
 import { WordModel } from '@/components/words/type';
 
 export interface FolderModel {
-  folderId: number;
-  createdAt: string;
+  folderId: string | null;
+  createdAt: number;
   folderName: string;
   color: string;
   wordList: WordModel[];
