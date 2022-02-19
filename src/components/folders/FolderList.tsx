@@ -90,7 +90,7 @@ const FolderList = () => {
   useEffect(() => {
     setLoading(true);
     const fetchData = async () => {
-      await saveDummyFolders();
+      // await saveDummyFolders();
       const data = await findAllFolders();
       setFolderList(data);
       setLoading(false);
