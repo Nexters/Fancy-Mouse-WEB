@@ -6,6 +6,7 @@ export { default as BtnMenu } from './BtnMenu';
 export { default as BtnSearch } from './BtnSearch';
 export { default as BtnSelect } from './BtnSelect';
 export { default as BtnTrash } from './BtnTrash';
+export { default as EmptyFill } from './EmptyFill';
 export { default as Folder00 } from './Folder00';
 export { default as Folder01 } from './Folder01';
 export { default as Folder02 } from './Folder02';

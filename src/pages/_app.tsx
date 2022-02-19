@@ -15,6 +15,7 @@ const Container = styled.div`
   min-height: 100vh;
   position: relative;
   margin: 2rem auto 0;
+  padding-bottom: 5rem;
 `;
 
 function App({ Component, pageProps }: AppProps) {

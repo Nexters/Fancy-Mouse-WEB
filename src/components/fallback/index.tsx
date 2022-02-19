@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import tw from 'twin.macro';
+import { EmptyFill } from '@/assets/icons';
 
 interface Props {
   isWord: boolean;
@@ -21,17 +22,15 @@ const FallbackText = styled.p`
 `;
 
 const FallbackImg = styled.div`
-  width: 5rem;
-  height: 5rem;
-  margin-bottom: 1.5rem;
-  background: #eef1f4;
-  border-radius: 20px;
+  margin-bottom: 1rem;
 `;
 
 const Fallback = ({ isWord }: Props) => {
   return (
     <Wrapper>
-      <FallbackImg />
+      <FallbackImg>
+        <EmptyFill />
+      </FallbackImg>
       {isWord ? <FallbackText>저장된 단어가 없어요.</FallbackText> : <FallbackText>저장된 폴더가 없어요.</FallbackText>}
     </Wrapper>
   );

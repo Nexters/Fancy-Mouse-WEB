@@ -7,7 +7,7 @@
     "start": "next start",
     "lint": "next lint",
     "style": "postcss src/styles/globals.css -o public/styles/globals.css",
-    "icon": "npx @svgr/cli --out-dir src/assets/icons --typescript public/assets/icons"
+    "icon": "npx @svgr/cli --out-dir src/assets/icons --typescript --ignore-existing public/assets/icons"
   },
   "babelMacros": {
     "twin": {

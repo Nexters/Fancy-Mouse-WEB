@@ -45,12 +45,6 @@ const ColorList = styled.ul`
   ${tw`flex flex-wrap justify-center`}
   gap: 1rem;
   margin-top: 1rem;
-
-  .folder-item {
-    ${tw`flex items-center`}
-    min-width: 2.5rem;
-    min-height: 2.5rem;
-  }
 `;
 
 const ButtonGroup = styled.div`
@@ -59,7 +53,14 @@ const ButtonGroup = styled.div`
   gap: 0.5rem;
 `;
 
-const ColorItem = (folder, hoveredId, selectedId) => {
+const ColorItem = styled.span`
+  display: flex;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  align-items: center;
+`;
+
+const getColor = (folder, hoveredId, selectedId) => {
   if (folder.colorId === selectedId) return <CircleSelect color={folder.color} />;
   else if (folder.colorId === hoveredId) return <CircleHover color={folder.color} />;
 
@@ -128,7 +129,7 @@ const FolderModal = () => {
               id={color.colorId}
               className="folder-item"
             >
-              {ColorItem(color, hoveredColorId, selectedColorId)}
+              <ColorItem>{getColor(color, hoveredColorId, selectedColorId)}</ColorItem>
             </li>
           );
         })}
