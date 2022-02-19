@@ -5,6 +5,7 @@ import { WordModel } from './type';
 import { MODAL_TYPE } from '@/components/modals/type';
 import { ModalContext } from '@/contexts/ModalContext';
 import { useWordContext } from '@/contexts/WordContext';
+import dayjs from 'dayjs';
 
 const Wrapper = styled.li`
   ${tw`bg-white/40`}
@@ -78,7 +79,7 @@ const WordItem = ({ word }: { word: WordModel }) => {
       <WordDesc>{word.meaning}</WordDesc>
       <WordDate>
         <span className="created-text">저장한 일시</span>
-        <span className="created-date">{word.createdAt}</span>
+        <span className="created-date">{dayjs(word.createdAt).format('YYYY-MM-DD')}</span>
       </WordDate>
     </Wrapper>
   );

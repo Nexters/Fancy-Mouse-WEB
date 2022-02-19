@@ -5,7 +5,8 @@ import tw from 'twin.macro';
 import Button from '@/components/buttons/Button';
 import { ModalContext } from '@/contexts/ModalContext';
 import { BtnEdit, BtnTrash } from '@/assets/icons';
-import { deleteWord, updateWordMemo } from '../../utils/firebase';
+import { deleteWord, updateWordMemo } from '@/utils/firebase';
+import dayjs from 'dayjs';
 
 const Wrapper = styled.div`
   width: 30rem;
@@ -137,7 +138,7 @@ const WordModal = () => {
         <span className="spelling">{selectedWord?.spelling}</span>
         <p>
           <span className="created-text">저장한 일시</span>
-          <span className="created-date">{selectedWord?.createdAt}</span>
+          <span className="created-date">{dayjs(selectedWord?.createdAt).format('YYYY-MM-DD')}</span>
         </p>
       </ModalHeader>
       <WordDesc>
