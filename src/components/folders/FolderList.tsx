@@ -119,8 +119,6 @@ const FolderList = () => {
     const fetchData = async () => {
       await saveDummyFolders();
       const data = await findAllFolders();
-      console.log('테테테테테테');
-      console.log(data);
       setFolderList(data);
       setLoading(false);
     };
