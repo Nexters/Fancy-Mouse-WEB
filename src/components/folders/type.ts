@@ -1,7 +1,7 @@
 import { WordModel } from '@/components/words/type';
 
 export interface FolderModel {
-  folderId: number;
+  folderId: string;
   createdAt: string;
   folderName: string;
   color: string;

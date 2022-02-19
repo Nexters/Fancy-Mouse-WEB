@@ -9,6 +9,7 @@ import CircleSelect from '@/assets/icons/IcCircleCheck';
 import { FOLDER_COLORS } from '@/components/modals/constants';
 import { FolderContext } from '@/contexts/FolderContext';
 import { FolderModel } from '@/components/folders/type';
+import { child, getDatabase, push, ref, set } from 'firebase/database';
 
 const Wrapper = styled.div`
   ${tw`flex flex-col w-full p-6`}
@@ -73,7 +74,7 @@ const FolderModal = () => {
     selectFolder({} as FolderModel);
   };
   const [hoveredFolderId, setHoveredFolderId] = useState<string>('');
-  const [selectedFolderId, setSelectedFolderId] = useState<string>('');
+  const [selectedFolderId, setSelectedFolderId] = useState<string | null>('');
 
   const handleTitleInput = (e) => {
     setFolderName(e.target.value);
@@ -87,12 +88,26 @@ const FolderModal = () => {
     setFolderColor(selectedId);
   };
 
+  const saveFolder = async (folderName: string, color: string) => {
+    console.log('saveFolder');
+    const db = getDatabase();
+    const newFolderId = push(child(ref(db), 'users/uid/folders')).key;
+    console.log(newFolderId);
+    const folder = {
+      id: newFolderId,
+      createdAt: Date.now(),
+      folderName,
+      color,
+    };
+    console.log(folder);
+    set(ref(db, `users/uuid/folders/${newFolderId}`), folder);
+    setSelectedFolderId(newFolderId);
+  };
+
   const handleClickSave = () => {
-    //TODO: API 연동
-    //보낼 값: selectedFolder에서 보내면 됨!!!
-    //selectedFolder.folderId, selectedFolder.folderName, selectedFolder.color, selectedFolder.wordList
     handleModal();
     selectFolder({} as FolderModel);
+    saveFolder(selectedFolder.folderName, selectedFolder.color);
   };
 
   return (
