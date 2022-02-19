@@ -1,15 +1,15 @@
-import React, { useContext, useState } from 'react';
-import styled from '@emotion/styled';
-import tw from 'twin.macro';
-import Button from '@/components/buttons/Button';
-import { ModalContext } from '@/contexts/ModalContext';
+import CircleSelect from '@/assets/icons/IcCircleCheck';
 import CircleDefault from '@/assets/icons/IcCircleDefault';
 import CircleHover from '@/assets/icons/IcCircleHover';
-import CircleSelect from '@/assets/icons/IcCircleCheck';
+import Button from '@/components/buttons/Button';
+import { FolderModel } from '@/components/folders/type';
 import { FOLDER_COLORS } from '@/components/modals/constants';
 import { FolderContext } from '@/contexts/FolderContext';
-import { FolderModel } from '@/components/folders/type';
-import { child, getDatabase, push, ref, set } from 'firebase/database';
+import { ModalContext } from '@/contexts/ModalContext';
+import styled from '@emotion/styled';
+import { getDatabase, ref, set } from 'firebase/database';
+import React, { useContext, useState } from 'react';
+import tw from 'twin.macro';
 
 const Wrapper = styled.div`
   ${tw`flex flex-col w-full p-6`}
@@ -90,7 +90,7 @@ const FolderModal = () => {
 
   const saveFolder = async (folderName: string, color: string) => {
     const db = getDatabase();
-    const newFolderId = push(child(ref(db), 'users/uid/folders')).key;
+    const newFolderId = selectedFolderId;
     const folder: FolderModel = {
       folderId: newFolderId,
       createdAt: Date.now(),
@@ -99,7 +99,6 @@ const FolderModal = () => {
       wordList: [],
     };
     set(ref(db, `users/uuid/folders/${newFolderId}`), folder);
-    setSelectedFolderId(newFolderId);
   };
 
   const handleClickSave = () => {
