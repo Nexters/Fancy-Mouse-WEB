@@ -114,7 +114,7 @@ const ModalFooter = styled.section`
   ${tw`flex justify-between`}
 `;
 const WordModal = () => {
-  const { selectedWord } = useWordContext();
+  const { selectedWord, setWordMemo } = useWordContext();
   const { handleModal } = useContext(ModalContext);
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
   const [memo, setMemo] = useState<string>(selectedWord?.memo ?? '');
@@ -126,6 +126,7 @@ const WordModal = () => {
   };
   const handleClickSave = () => {
     setIsEditMode(false);
+    setWordMemo(memo);
     updateWordMemo(selectedWord.folderId, selectedWord.wordId, memo);
   };
   const handleClickClose = () => {

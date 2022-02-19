@@ -23,7 +23,7 @@ export const saveFolder = async (folderName: string, color: string) => {
   const db = getDatabase();
   const newFolderId = push(child(ref(db), 'users/uuid/folders')).key;
   const folder: FolderModel = {
-    folderId: newFolderId,
+    folderId: newFolderId as string,
     createdAt: Date.now(),
     folderName,
     color,
@@ -96,9 +96,8 @@ export const updateWordMemo = async (folderId: string, wordId: number, memo: str
   const words = await findWordsByFolderId(folderId);
   if (words) {
     const updatedWords = words.map((word) => {
-      if (word.wordId === wordId) {
-        word.memo = memo;
-      }
+      if (word.wordId === wordId) word.memo = memo;
+      return word;
     });
     await set(ref(db, `users/uuid/folders/${folderId}/wordList`), updatedWords);
   }
