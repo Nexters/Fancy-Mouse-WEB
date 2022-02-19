@@ -89,17 +89,15 @@ const FolderModal = () => {
   };
 
   const saveFolder = async (folderName: string, color: string) => {
-    console.log('saveFolder');
     const db = getDatabase();
     const newFolderId = push(child(ref(db), 'users/uid/folders')).key;
-    console.log(newFolderId);
-    const folder = {
-      id: newFolderId,
+    const folder: FolderModel = {
+      folderId: newFolderId,
       createdAt: Date.now(),
       folderName,
       color,
+      wordList: [],
     };
-    console.log(folder);
     set(ref(db, `users/uuid/folders/${newFolderId}`), folder);
     setSelectedFolderId(newFolderId);
   };
