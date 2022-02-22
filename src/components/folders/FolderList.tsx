@@ -2,7 +2,7 @@ import Fallback from '@/components/fallback';
 import Folder from '@/components/folders/Folder';
 import styled from '@emotion/styled';
 import tw from 'twin.macro';
-import { findAllFolders, saveWord } from '@/utils/firebase';
+import { findAllFolders } from '@/utils/firebase';
 import { FolderModel } from './type';
 import { useQuery } from 'react-query';
 
