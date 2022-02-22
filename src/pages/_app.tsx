@@ -9,6 +9,7 @@ import { ModalProvider } from '@/contexts/ModalContext';
 import { WordProvider } from '@/contexts/WordContext';
 import { initializeApp } from 'firebase/app';
 import { FolderProvider } from '@/contexts/FolderContext';
+import 'firebase/auth';
 
 const Container = styled.div`
   min-height: 100vh;
