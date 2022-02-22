@@ -5,23 +5,22 @@ import tw from 'twin.macro';
 import { findAllFolders, saveWord } from '@/utils/firebase';
 import { FolderModel } from './type';
 import { useQuery } from 'react-query';
-import { useFolderContext } from '@/contexts/FolderContext';
 
-const saveDummyFolders = async () => {
-  await saveWord('-MwHN41rMks_CFnZmSns', {
-    spelling: 'provide',
-    wordId: 123,
-    meaning: ['제공하다', '주다'],
-    synonyms: ['hide', 'hat', 'face', 'veil', 'disguise', 'camouflage'],
-    examples: [
-      'In the meantime, the province magistrate provided supplies to the British.',
-      'But mostly the point was to give pleasure and provide finality.',
-    ],
-    memo: '테스트 메모',
-    createdAt: Date.now(),
-    folderId: '-MwHN41rMks_CFnZmSns',
-  });
-};
+// const saveDummyFolders = async () => {
+//   await saveWord('-MwHN41rMks_CFnZmSns', {
+//     spelling: 'provide',
+//     wordId: 123,
+//     meaning: ['제공하다', '주다'],
+//     synonyms: ['hide', 'hat', 'face', 'veil', 'disguise', 'camouflage'],
+//     examples: [
+//       'In the meantime, the province magistrate provided supplies to the British.',
+//       'But mostly the point was to give pleasure and provide finality.',
+//     ],
+//     memo: '테스트 메모',
+//     createdAt: Date.now(),
+//     folderId: '-MwHN41rMks_CFnZmSns',
+//   });
+// };
 
 const FolderListWrapper = styled.ul`
   ${tw`flex flex-col`}
