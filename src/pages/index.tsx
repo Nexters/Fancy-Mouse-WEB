@@ -6,19 +6,25 @@ import WordList from '@/components/words/WordList';
 import ListCounter from '@/components/layouts/ListCounter';
 import { useQueryClient } from 'react-query';
 import { WordModel } from '@/components/words/type';
+import styled from '@emotion/styled';
+
+const Wrapper = styled.div`
+  background: #eef1f4;
+  max-width: 960px;
+`;
 
 const Home: NextPage = () => {
   const queryClient = useQueryClient();
   const words = queryClient.getQueryData(['words', { folderId: undefined }]) as WordModel[];
   return (
-    <>
+    <Wrapper>
       <GNB />
       <Modal />
       <Layout>
         <ListCounter count={words?.length} isWord />
         <WordList />
       </Layout>
-    </>
+    </Wrapper>
   );
 };
 

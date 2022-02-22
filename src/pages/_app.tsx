@@ -11,10 +11,9 @@ import { initializeApp } from 'firebase/app';
 import { FolderProvider } from '@/contexts/FolderContext';
 
 const Container = styled.div`
-  max-width: 960px;
   min-height: 100vh;
   position: relative;
-  margin: 2rem auto 0;
+  margin: 0 auto;
   padding-bottom: 5rem;
 `;
 
