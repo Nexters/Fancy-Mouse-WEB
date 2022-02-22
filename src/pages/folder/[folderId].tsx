@@ -9,8 +9,8 @@ import { FolderContext } from '@/contexts/FolderContext';
 import { MODAL_TYPE } from '@/components/modals/type';
 import { BtnBack, BtnEdit, BtnTrash } from '@/assets/icons';
 import { useRouter } from 'next/router';
-import { WordModel } from '@/components/words/type';
-import { useQueryClient } from 'react-query';
+import { useFolder } from '@/hooks/useFolder';
+import { FolderModel } from '@/components/folders/type';
 
 const Header = styled.section`
   ${tw`flex justify-between items-center text-gray-70 font-bold`}
@@ -41,26 +41,31 @@ const FolderDetailPage = () => {
   const { handleModal } = useContext(ModalContext);
   const { selectFolder, selectedFolder } = useContext(FolderContext);
   const router = useRouter();
-  const queryClient = useQueryClient();
 
-  const words = queryClient.getQueryData(['words', { folderId: router.query.folderId }]) as WordModel[];
+  const folderId = router.query.folderId;
+  const formattedFolder = useFolder(folderId) as FolderModel;
+
   const handleClickDelete = (e) => {
     e.stopPropagation();
-    selectFolder(selectedFolder);
+
+    if (Object.keys(selectedFolder).length === 0) selectFolder(formattedFolder);
+    else selectFolder(selectedFolder);
     handleModal(MODAL_TYPE.DELETE);
   };
   const handleClickEdit = (e) => {
     e.stopPropagation();
-    selectFolder(selectedFolder);
+    if (Object.keys(selectedFolder).length === 0) selectFolder(formattedFolder);
+    else selectFolder(selectedFolder);
     handleModal(MODAL_TYPE.FOLDER);
   };
+
   return (
     <>
       <GNB />
       <Header>
         <p className="flex">
           <BtnBack className="mr-6 cursor-pointer" onClick={() => router.back()} />
-          {selectedFolder.folderName}
+          {formattedFolder.folderName}
         </p>
         <div className="button-wrapper">
           <button onClick={handleClickEdit} className="button">
@@ -73,7 +78,7 @@ const FolderDetailPage = () => {
           </button>
         </div>
       </Header>
-      <ListCounter count={words?.length} isWord />
+      <ListCounter count={formattedFolder.wordList?.length} isWord />
       <WordList />
     </>
   );
