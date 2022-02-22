@@ -11,6 +11,7 @@ import styled from '@emotion/styled';
 const Wrapper = styled.div`
   background: #eef1f4;
   max-width: 960px;
+  margin: 0 auto;
 `;
 
 const Home: NextPage = () => {
