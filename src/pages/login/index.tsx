@@ -69,7 +69,8 @@ const Login = () => {
   const { setUserInfo } = useContext(AuthContext);
   const router = useRouter();
 
-  const googleLoginHandler = async () => {
+  const googleLoginHandler = async (e) => {
+    e.preventDefault();
     console.log('google');
     const provider = new GoogleAuthProvider();
     await signInWithRedirect(auth, provider).catch((error) => {
