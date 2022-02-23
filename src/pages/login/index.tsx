@@ -64,31 +64,15 @@ const LoginContainer = styled.div`
 `;
 
 const Login = () => {
-  useEffect(() => {
-    const firebaseConfig = {
-      apiKey: process.env.FIREBASE_API_KEY,
-      authDomain: `${process.env.FIREBASE_PROJECT_ID}.firebaseapp.com`,
-      databaseURL: 'https://fancymouse-cb040-default-rtdb.firebaseio.com',
-      projectId: process.env.FIREBASE_PROJECT_ID,
-      storageBucket: `${process.env.FIREBASE_PROJECT_ID}.appspot.com`,
-      messagingSenderId: process.env.FIREBASE_MESSAGEING_SENDER_ID,
-      appId: process.env.FIREBASE_APP_ID,
-      measurementId: process.env.FIREBASE_MESUAREMENT_ID,
-    };
-    initializeApp(firebaseConfig);
-  }, []);
+  const auth = getAuth();
 
   const googleLoginHandler = async () => {
     console.log('google');
     const provider = new GoogleAuthProvider();
-    const auth = getAuth();
-    signInWithRedirect(auth, provider);
-    getRedirectResult(auth)
-      .then((result) => {
+    await signInWithRedirect(auth, provider)
+      .then((result: UserCredential) => {
         // This gives you a Google Access Token. You can use it to access Google APIs.
-        const credential = GoogleAuthProvider.credentialFromResult(result as UserCredential);
-        console.log(result);
-        console.log(credential);
+        const credential = GoogleAuthProvider.credentialFromResult(result);
       })
       .catch((error) => {
         // Handle Errors here.
@@ -96,6 +80,26 @@ const Login = () => {
         // ...
       });
   };
+
+  useEffect(() => {
+    getRedirectResult(auth)
+      .then((result: UserCredential | null) => {
+        // This gives you a Google Access Token. You can use it to access Google APIs.
+        if (result) {
+          const credential = GoogleAuthProvider.credentialFromResult(result as UserCredential);
+          console.log(result);
+          console.log('email', result.user.email);
+          console.log('displayName', result.user.displayName);
+          console.log('uid', result.user.uid);
+          console.log(credential);
+        }
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        console.error(error);
+        // ...
+      });
+  }, []);
 
   return (
     <Wrapper>

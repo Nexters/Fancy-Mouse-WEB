@@ -7,9 +7,8 @@ import '../styles/globals.css';
 import styled from '@emotion/styled';
 import { ModalProvider } from '@/contexts/ModalContext';
 import { WordProvider } from '@/contexts/WordContext';
-import { initializeApp } from 'firebase/app';
+import { initializeApp, getApps } from 'firebase/app';
 import { FolderProvider } from '@/contexts/FolderContext';
-import 'firebase/auth';
 
 const Container = styled.div`
   min-height: 100vh;
@@ -29,7 +28,9 @@ function App({ Component, pageProps }: AppProps) {
     appId: process.env.FIREBASE_APP_ID,
     measurementId: process.env.FIREBASE_MESUAREMENT_ID,
   };
-  initializeApp(firebaseConfig);
+  if (!getApps().length) {
+    initializeApp(firebaseConfig);
+  }
   const [queryClient] = useState(() => new QueryClient());
 
   return (
