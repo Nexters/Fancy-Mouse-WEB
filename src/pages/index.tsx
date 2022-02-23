@@ -4,7 +4,7 @@ import Layout from '@/components/layouts';
 import Modal from '@/components/modals/Modal';
 import WordList from '@/components/words/WordList';
 import ListCounter from '@/components/layouts/ListCounter';
-import { useQuery, useQueryClient } from 'react-query';
+import { useQuery } from 'react-query';
 import { WordModel } from '@/components/words/type';
 import styled from '@emotion/styled';
 import { AuthContext } from '@/contexts/AuthContext';

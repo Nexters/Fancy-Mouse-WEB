@@ -10,6 +10,7 @@ import { WordProvider } from '@/contexts/WordContext';
 import { initializeApp, getApps } from 'firebase/app';
 import { FolderProvider } from '@/contexts/FolderContext';
 import { AuthProvider } from '@/contexts/AuthContext';
+import { ToastContainer } from '@/components/toast';
 
 const Container = styled.div`
   min-height: 100vh;
@@ -49,6 +50,7 @@ function App({ Component, pageProps }: AppProps) {
                   <Container>
                     <Component {...pageProps} />
                   </Container>
+                  <ToastContainer />
                 </ModalProvider>
               </WordProvider>
             </FolderProvider>
