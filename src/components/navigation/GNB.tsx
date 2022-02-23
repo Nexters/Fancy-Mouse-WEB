@@ -17,6 +17,7 @@ const GNBWrapper = styled.nav`
   margin-bottom: 2rem;
   padding: 1.5rem;
   border-radius: 1.25rem;
+  margin-top: 1.25rem;
 `;
 
 const UserText = styled.p`
