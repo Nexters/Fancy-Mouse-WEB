@@ -10,8 +10,7 @@ import { FolderModel } from '@/components/folders/type';
 import styled from '@emotion/styled';
 import tw from 'twin.macro';
 import { BtnAdd } from '@/assets/icons';
-import { useQuery, useQueryClient } from 'react-query';
-import ErrorBoundary from '@/components/boundaries/ErrorBoundary';
+import { useQuery } from 'react-query';
 import { findAllFolders } from '@/utils/firebase';
 
 const Header = styled.section`

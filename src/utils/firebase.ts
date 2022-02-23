@@ -83,6 +83,7 @@ export const findAllWords = async (): Promise<WordModel[]> => {
 export const saveWord = async (folderId: string, word: WordModel) => {
   const db = getDatabase();
   let words = await findWordsByFolderId(folderId);
+
   if (words) {
     words.push(word);
   } else {
@@ -94,23 +95,20 @@ export const saveWord = async (folderId: string, word: WordModel) => {
 export const updateWordMemo = async (folderId: string, wordId: number, memo: string) => {
   const db = getDatabase();
   const words = await findWordsByFolderId(folderId);
-  if (words) {
-    const updatedWords = words.map((word) => {
-      if (word.wordId === wordId) word.memo = memo;
-      return word;
-    });
-    await set(ref(db, `users/uuid/folders/${folderId}/wordList`), updatedWords);
-  }
-  return;
+  if (!words) return;
+  const updatedWords = words.map((word) => {
+    if (word.wordId === wordId) word.memo = memo;
+    return word;
+  });
+  await set(ref(db, `users/uuid/folders/${folderId}/wordList`), updatedWords);
 };
 
 export const deleteWord = async (folderId: string, wordId: number) => {
   const db = getDatabase();
   const words = await findWordsByFolderId(folderId);
-  if (words) {
-    const filteredWords = words.filter((item) => {
-      return item.wordId != wordId;
-    });
-    await set(ref(db, `users/uuid/folders/${folderId}/wordList`), filteredWords);
-  }
+  if (!words) return;
+  const filteredWords = words.filter((item) => {
+    return item.wordId != wordId;
+  });
+  await set(ref(db, `users/uuid/folders/${folderId}/wordList`), filteredWords);
 };
