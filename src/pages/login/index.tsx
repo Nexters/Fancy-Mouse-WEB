@@ -69,16 +69,11 @@ const Login = () => {
   const googleLoginHandler = async () => {
     console.log('google');
     const provider = new GoogleAuthProvider();
-    await signInWithRedirect(auth, provider)
-      .then((result: UserCredential) => {
-        // This gives you a Google Access Token. You can use it to access Google APIs.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        console.error(error);
-        // ...
-      });
+    await signInWithRedirect(auth, provider).catch((error) => {
+      // Handle Errors here.
+      console.error(error);
+      // ...
+    });
   };
 
   useEffect(() => {
