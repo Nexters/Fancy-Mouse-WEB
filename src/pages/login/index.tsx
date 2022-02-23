@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import FancyMouseIcon from '@/assets/icons/FancyMouseIcon';
 import SquareIcon from '@/assets/icons/SquareIcon';
 import GoogleLoginButton from '@/assets/icons/GoogleLoginButton';
 import { getAuth, getRedirectResult, GoogleAuthProvider, signInWithRedirect, UserCredential } from 'firebase/auth';
-import { initializeApp } from 'firebase/app';
 import styled from '@emotion/styled';
+import { AuthContext } from '@/contexts/AuthContext';
+import { useRouter } from 'next/router';
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -65,6 +66,8 @@ const LoginContainer = styled.div`
 
 const Login = () => {
   const auth = getAuth();
+  const { userInfo, setUserInfo } = useContext(AuthContext);
+  const router = useRouter();
 
   const googleLoginHandler = async () => {
     console.log('google');
@@ -82,11 +85,12 @@ const Login = () => {
         // This gives you a Google Access Token. You can use it to access Google APIs.
         if (result) {
           const credential = GoogleAuthProvider.credentialFromResult(result as UserCredential);
-          console.log(result);
-          console.log('email', result.user.email);
-          console.log('displayName', result.user.displayName);
-          console.log('uid', result.user.uid);
-          console.log(credential);
+          setUserInfo({
+            email: result.user.email || '',
+            userName: result.user.displayName || '',
+            uid: result.user.uid || '',
+          });
+          router.push('/');
         }
       })
       .catch((error) => {

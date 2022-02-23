@@ -9,6 +9,7 @@ import { ModalProvider } from '@/contexts/ModalContext';
 import { WordProvider } from '@/contexts/WordContext';
 import { initializeApp, getApps } from 'firebase/app';
 import { FolderProvider } from '@/contexts/FolderContext';
+import { AuthProvider } from '@/contexts/AuthContext';
 
 const Container = styled.div`
   min-height: 100vh;
@@ -41,15 +42,17 @@ function App({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <ReactQueryDevtools initialIsOpen={false} />
-          <FolderProvider>
-            <WordProvider>
-              <ModalProvider>
-                <Container>
-                  <Component {...pageProps} />
-                </Container>
-              </ModalProvider>
-            </WordProvider>
-          </FolderProvider>
+          <AuthProvider>
+            <FolderProvider>
+              <WordProvider>
+                <ModalProvider>
+                  <Container>
+                    <Component {...pageProps} />
+                  </Container>
+                </ModalProvider>
+              </WordProvider>
+            </FolderProvider>
+          </AuthProvider>
         </Hydrate>
       </QueryClientProvider>
     </>

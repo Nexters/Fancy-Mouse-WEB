@@ -25,7 +25,7 @@ const UserText = styled.p`
   line-height: 1.25rem;
 `;
 
-const GNB = () => {
+const GNB = ({ userInfo }: any) => {
   const { pathname, query } = useRouter();
   const isFolderDetailPage = !!query.folderId;
   return (
@@ -37,7 +37,8 @@ const GNB = () => {
         {!isFolderDetailPage && <Tabs pathname={pathname} />}
       </div>
       <UserText>
-        UserName<span className="text-gray-40 font-normal">님</span>
+        {userInfo?.userName || 'UserName'}
+        <span className="text-gray-40 font-normal">님</span>
       </UserText>
     </GNBWrapper>
   );
