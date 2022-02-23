@@ -66,7 +66,7 @@ const LoginContainer = styled.div`
 
 const Login = () => {
   const auth = getAuth();
-  const { userInfo, setUserInfo } = useContext(AuthContext);
+  const { setUserInfo } = useContext(AuthContext);
   const router = useRouter();
 
   const googleLoginHandler = async () => {
@@ -84,7 +84,6 @@ const Login = () => {
       .then((result: UserCredential | null) => {
         // This gives you a Google Access Token. You can use it to access Google APIs.
         if (result) {
-          const credential = GoogleAuthProvider.credentialFromResult(result as UserCredential);
           setUserInfo({
             email: result.user.email || '',
             userName: result.user.displayName || '',
