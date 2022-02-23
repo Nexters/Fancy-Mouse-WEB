@@ -10,7 +10,9 @@ import { FolderModel } from '@/components/folders/type';
 import styled from '@emotion/styled';
 import tw from 'twin.macro';
 import { BtnAdd } from '@/assets/icons';
-import { useQueryClient } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
+import ErrorBoundary from '@/components/boundaries/ErrorBoundary';
+import { findAllFolders } from '@/utils/firebase';
 
 const Header = styled.section`
   ${tw`flex justify-between`}
@@ -24,31 +26,50 @@ const ButtonWrapper = styled.p`
   cursor: pointer;
 `;
 
+const Wrapper = styled.div`
+  background: #eef1f4;
+  max-width: 960px;
+  margin: 0 auto;
+`;
+
 const FolderListPage = () => {
   const { handleModal } = React.useContext(ModalContext);
   const { selectFolder } = useContext(FolderContext);
-  const queryClient = useQueryClient();
-  const folders = queryClient.getQueryData('folders') as FolderModel[];
+
+  useEffect(() => {
+    selectFolder({} as FolderModel);
+  }, []);
+
+  const fetchData = async () => {
+    const data: FolderModel[] = await findAllFolders();
+    return data;
+  };
+
+  const { isLoading, data } = useQuery('folders', fetchData);
+
+  if (isLoading) {
+    return <></>;
+  }
 
   const handleClickFolder = () => {
     handleModal(MODAL_TYPE.FOLDER);
   };
-  useEffect(() => {
-    selectFolder({} as FolderModel);
-  }, []);
+
   return (
     <>
-      <GNB />
-      <Layout>
-        <Header>
-          <ListCounter count={folders?.length} isWord={false} />
-          <ButtonWrapper onClick={() => handleClickFolder()}>
-            <BtnAdd />
-            폴더 추가하기
-          </ButtonWrapper>
-        </Header>
-        <FolderList />
-      </Layout>
+      <Wrapper>
+        <GNB />
+        <Layout>
+          <Header>
+            <ListCounter count={data?.length ?? 0} isWord={false} />
+            <ButtonWrapper onClick={() => handleClickFolder()}>
+              <BtnAdd />
+              폴더 추가하기
+            </ButtonWrapper>
+          </Header>
+          <FolderList />
+        </Layout>
+      </Wrapper>
     </>
   );
 };

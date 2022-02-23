@@ -37,6 +37,12 @@ const Header = styled.section`
   }
 `;
 
+const Wrapper = styled.div`
+  background: #eef1f4;
+  max-width: 960px;
+  margin: 0 auto;
+`;
+
 const FolderDetailPage = () => {
   const { handleModal } = useContext(ModalContext);
   const { selectFolder, selectedFolder } = useContext(FolderContext);
@@ -61,25 +67,27 @@ const FolderDetailPage = () => {
 
   return (
     <>
-      <GNB />
-      <Header>
-        <p className="flex">
-          <BtnBack className="mr-6 cursor-pointer" onClick={() => router.back()} />
-          {formattedFolder.folderName}
-        </p>
-        <div className="button-wrapper">
-          <button onClick={handleClickEdit} className="button">
-            <BtnEdit />
-            수정하기
-          </button>
-          <button onClick={handleClickDelete} className="button delete">
-            <BtnTrash />
-            삭제하기
-          </button>
-        </div>
-      </Header>
-      <ListCounter count={formattedFolder.wordList?.length} isWord />
-      <WordList />
+      <Wrapper>
+        <GNB />
+        <Header>
+          <p className="flex">
+            <BtnBack className="mr-6 cursor-pointer" onClick={() => router.back()} />
+            {formattedFolder.folderName}
+          </p>
+          <div className="button-wrapper">
+            <button onClick={handleClickEdit} className="button">
+              <BtnEdit />
+              수정하기
+            </button>
+            <button onClick={handleClickDelete} className="button delete">
+              <BtnTrash />
+              삭제하기
+            </button>
+          </div>
+        </Header>
+        <ListCounter count={formattedFolder.wordList?.length ?? 0} isWord />
+        <WordList />
+      </Wrapper>
     </>
   );
 };

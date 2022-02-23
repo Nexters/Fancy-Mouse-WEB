@@ -2,9 +2,8 @@ import Fallback from '@/components/fallback';
 import Folder from '@/components/folders/Folder';
 import styled from '@emotion/styled';
 import tw from 'twin.macro';
-import { findAllFolders } from '@/utils/firebase';
 import { FolderModel } from './type';
-import { useQuery } from 'react-query';
+import { useQueryClient } from 'react-query';
 
 // const saveDummyFolders = async () => {
 //   await saveWord('-MwHN41rMks_CFnZmSns', {
@@ -30,21 +29,11 @@ const FolderListWrapper = styled.ul`
 `;
 
 const FolderList = () => {
-  // saveDummyFolders();
-  const fetchData = async () => {
-    const data: FolderModel[] = await findAllFolders();
-    return data;
-  };
-
-  const { isLoading, data } = useQuery('folders', fetchData);
-
-  if (isLoading) {
-    return <></>;
-  }
-
-  return data?.length ? (
+  const queryClient = useQueryClient();
+  const folders = queryClient.getQueryData('folders') as FolderModel[];
+  return folders?.length ? (
     <FolderListWrapper>
-      {data?.map((d) => (
+      {folders?.map((d) => (
         <Folder key={d.folderId} folder={d} />
       ))}
     </FolderListWrapper>
