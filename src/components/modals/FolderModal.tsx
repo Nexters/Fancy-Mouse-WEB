@@ -12,6 +12,7 @@ import tw from 'twin.macro';
 import { saveFolder, updateFolderNameAndFolderColor } from '@/utils/firebase';
 import { useMutation, useQueryClient } from 'react-query';
 import { useRouter } from 'next/router';
+import toast from '@/components/toast';
 
 const Wrapper = styled.div`
   ${tw`flex flex-col w-full p-6`}
@@ -90,6 +91,7 @@ const FolderModal = () => {
   const createMutation = useMutation(createFolder, {
     onSuccess: () => {
       handleModal();
+      toast('새로운 폴더를 만들었어요!', { delay: 3000, isAlert: false });
       selectFolder({} as FolderModel);
       return queryClient.invalidateQueries('folders');
     },
@@ -98,6 +100,7 @@ const FolderModal = () => {
   const updateMutation = useMutation(updateFolder, {
     onSuccess: () => {
       handleModal();
+      toast('수정한 내용이 저장되었어요!', { delay: 3000, isAlert: false });
       if (router.query?.folderId === undefined) selectFolder({} as FolderModel);
 
       return queryClient.invalidateQueries('folders');

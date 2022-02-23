@@ -8,6 +8,7 @@ import tw from 'twin.macro';
 import { deleteFolder } from '../../utils/firebase';
 import { useMutation, useQueryClient } from 'react-query';
 import { useRouter } from 'next/router';
+import toast from '@/components/toast';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -39,6 +40,7 @@ const DeleteModal = () => {
   const mutation = useMutation(deleteFolderApi, {
     onSuccess: () => {
       handleModal();
+      toast('폴더가 삭제되었어요', { delay: 3000, isAlert: true });
       selectFolder({} as FolderModel);
       return queryClient.invalidateQueries('folders');
     },

@@ -9,6 +9,8 @@ import { deleteWord, updateWordMemo } from '@/utils/firebase';
 import dayjs from 'dayjs';
 import { useFolderIdFormatter } from '@/hooks/useFolderIdFormatter';
 import { useFolderIcon } from '@/hooks/useFolderIcon';
+import toast from '@/components/toast';
+import { useMutation, useQueryClient } from 'react-query';
 
 const Wrapper = styled.div`
   width: 30rem;
@@ -114,20 +116,35 @@ const ModalFooter = styled.section`
   ${tw`flex justify-between`}
 `;
 const WordModal = () => {
+  const queryClient = useQueryClient();
   const { selectedWord, setWordMemo } = useWordContext();
   const { handleModal } = useContext(ModalContext);
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
   const [memo, setMemo] = useState<string>(selectedWord?.memo ?? '');
+
+  const deleteWordApi = () => {
+    return deleteWord(selectedWord.folderId, selectedWord.wordId);
+  };
+
+  const deleteMutation = useMutation(deleteWordApi, {
+    onSuccess: () => {
+      toast('단어가 삭제되었어요.', { delay: 3000, isAlert: true });
+      handleModal();
+      return queryClient.invalidateQueries('words');
+    },
+  });
+
   const handleClickDelete = () => {
-    deleteWord(selectedWord.folderId, selectedWord.wordId);
+    deleteMutation.mutate();
   };
   const handleClickEdit = () => {
     setIsEditMode(true);
   };
-  const handleClickSave = () => {
+  const handleClickSave = async () => {
     setIsEditMode(false);
     setWordMemo(memo);
-    updateWordMemo(selectedWord.folderId, selectedWord.wordId, memo);
+    await updateWordMemo(selectedWord.folderId, selectedWord.wordId, memo);
+    toast('수정한 내용이 저장되었어요!', { delay: 3000, isAlert: false });
   };
   const handleClickClose = () => {
     handleModal();
