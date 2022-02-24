@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import tw from 'twin.macro';
 import Button from '@/components/buttons/Button';
 import { ModalContext } from '@/contexts/ModalContext';
-import { BtnEdit, BtnTrash } from '@/assets/icons';
+import { BtnEdit, BtnTrash, IcCheck } from '@/assets/icons';
 import { deleteWord, updateWordMemo } from '@/utils/firebase';
 import dayjs from 'dayjs';
 import { useFolderIdFormatter } from '@/hooks/useFolderIdFormatter';
@@ -106,9 +106,9 @@ const Memo = styled.section<{ isEditMode: boolean }>`
     ${tw`text-gray-50 block flex justify-between`}
     font-size: 0.75rem;
     margin-bottom: 0.5rem;
+    min-height: 2rem;
 
     .memo-header-btn {
-      ${tw`text-primary`}
       display: inline-flex;
       align-items: center;
       font-size: 0.875rem;
@@ -121,6 +121,7 @@ const Memo = styled.section<{ isEditMode: boolean }>`
     width: 100%;
     flex-grow: 1;
     resize: none !important;
+    max-height: 1.5rem;
   }
 `;
 
@@ -201,11 +202,14 @@ const WordModal = () => {
           내가 남긴 메모
           {isEditMode ? (
             <button onClick={handleClickSave}>
-              <span className="memo-header-btn">저장하기</span>
+              <span className="memo-header-btn text-folder02">
+                <IcCheck />
+                저장하기
+              </span>
             </button>
           ) : (
             <button onClick={handleClickEdit}>
-              <span className="memo-header-btn">
+              <span className="memo-header-btn text-primary">
                 <BtnEdit />
                 수정하기
               </span>
