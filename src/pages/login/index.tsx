@@ -1,12 +1,11 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import GoogleLoginButton from '@/assets/icons/GoogleLoginButton';
-import { getAuth, getRedirectResult, GoogleAuthProvider, signInWithRedirect, UserCredential } from 'firebase/auth';
+import { getAuth, GoogleAuthProvider, signInWithRedirect } from 'firebase/auth';
 import styled from '@emotion/styled';
-import { AuthContext } from '@/contexts/AuthContext';
-import { useRouter } from 'next/router';
 import tw from 'twin.macro';
 import Image from 'next/image';
 import { Logo } from '@/assets/icons';
+import { useRouter } from 'next/router';
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -62,9 +61,11 @@ const LoginContainer = styled.div`
 `;
 
 const Login = () => {
-  const auth = getAuth();
-  const { setUserInfo } = useContext(AuthContext);
   const router = useRouter();
+  const auth = getAuth();
+  useEffect(() => {
+    if (window.localStorage.getItem('name')) router.push('/');
+  }, []);
 
   const googleLoginHandler = async (e) => {
     e.preventDefault();
@@ -75,26 +76,6 @@ const Login = () => {
       // ...
     });
   };
-
-  useEffect(() => {
-    getRedirectResult(auth)
-      .then((result: UserCredential | null) => {
-        // This gives you a Google Access Token. You can use it to access Google APIs.
-        if (result) {
-          setUserInfo({
-            email: result.user.email || '',
-            userName: result.user.displayName || '',
-            uid: result.user.uid || '',
-          });
-          router.push('/');
-        }
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        console.error(error);
-        // ...
-      });
-  }, []);
 
   return (
     <Wrapper>

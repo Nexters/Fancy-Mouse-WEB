@@ -8,8 +8,9 @@ import { useQuery } from 'react-query';
 import { WordModel } from '@/components/words/type';
 import styled from '@emotion/styled';
 import { AuthContext } from '@/contexts/AuthContext';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { findAllWords } from '@/utils/firebase';
+import { useRouter } from 'next/router';
 
 const Wrapper = styled.div`
   background: #eef1f4;
@@ -18,12 +19,19 @@ const Wrapper = styled.div`
 `;
 
 const Home: NextPage = () => {
+  const router = useRouter();
   const fetchData = async (): Promise<WordModel[]> => {
     return await findAllWords();
   };
 
   const { data } = useQuery(['words', { folderId: undefined }], fetchData);
-  const { userInfo } = useContext(AuthContext);
+  const { userInfo, setUserInfo } = useContext(AuthContext);
+  useEffect(() => {
+    const name = window.localStorage.getItem('name');
+    if (!name) router.push('/login');
+    else setUserInfo({ ...userInfo, userName: name });
+  }, []);
+
   return (
     <Wrapper>
       <GNB userInfo={userInfo} />
