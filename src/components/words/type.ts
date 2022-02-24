@@ -1,9 +1,10 @@
 export interface WordModel {
-  wordId: number;
+  wordId: string;
   spelling: string;
   meaning?: string[];
   synonyms?: string[];
-  examples?: string[];
+  pronounce?: string;
+  example?: string;
   memo?: string;
   createdAt: number;
   folderId: string;

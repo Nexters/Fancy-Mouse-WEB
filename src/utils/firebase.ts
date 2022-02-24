@@ -92,7 +92,7 @@ export const saveWord = async (folderId: string, word: WordModel) => {
   set(ref(db, `users/uuid/folders/${folderId}/wordList`), words);
 };
 
-export const updateWordMemo = async (folderId: string, wordId: number, memo: string) => {
+export const updateWordMemo = async (folderId: string, wordId: string, memo: string) => {
   const db = getDatabase();
   const words = await findWordsByFolderId(folderId);
   if (!words) return;
@@ -103,7 +103,7 @@ export const updateWordMemo = async (folderId: string, wordId: number, memo: str
   await set(ref(db, `users/uuid/folders/${folderId}/wordList`), updatedWords);
 };
 
-export const deleteWord = async (folderId: string, wordId: number) => {
+export const deleteWord = async (folderId: string, wordId: string) => {
   const db = getDatabase();
   const words = await findWordsByFolderId(folderId);
   if (!words) return;

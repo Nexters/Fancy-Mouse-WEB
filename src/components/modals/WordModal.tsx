@@ -58,9 +58,21 @@ const WordDesc = styled.section`
   min-height: 5rem;
   max-height: 13.375rem;
   overflow-y: auto;
-  font-size: 1rem;
+  font-size: 0.875rem;
   line-height: 1.5rem;
   margin-bottom: 1rem;
+
+  .meaning {
+    ${tw`text-gray-70`}
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .desc-title {
+    font-size: 0.75rem;
+    margin-right: 0.25rem;
+    margin-bottom: 0.5rem;
+  }
 `;
 
 const Sentence = styled.section`
@@ -165,7 +177,21 @@ const WordModal = () => {
           <span className="created-date">{dayjs(selectedWord?.createdAt).format('YYYY-MM-DD')}</span>
         </p>
       </ModalHeader>
-      <WordDesc>{selectedWord?.meaning}</WordDesc>
+      <WordDesc>
+        <p className="meaning">{selectedWord.meaning?.join(', ')}</p>
+        <p>
+          <span className="desc-title text-folder02">발음</span>
+          {selectedWord.pronounce}
+        </p>
+        <p>
+          <span className="desc-title text-folder03">예문</span>
+          {selectedWord.example}
+        </p>
+        <p>
+          <span className="desc-title text-folder04">동의어</span>
+          {selectedWord.synonyms?.join(', ')}
+        </p>
+      </WordDesc>
       <Sentence>
         <span className="sentence-title">함께 저장한 문장</span>
         문장문장

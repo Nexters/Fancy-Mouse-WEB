@@ -39,7 +39,7 @@ const WordList = () => {
   return data?.length ? (
     <WordListWrapper>
       {data?.map((d) => (
-        <Word key={d.createdAt} word={d} />
+        <Word key={d.wordId} word={d} />
       ))}
     </WordListWrapper>
   ) : (

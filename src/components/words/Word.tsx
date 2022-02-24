@@ -44,10 +44,24 @@ const WordSpelling = styled.span`
 const WordDesc = styled.section`
   ${tw`bg-gray-20 text-gray-60 p-4 my-4 mx-2`}
   border-radius: 0.625rem;
-  height: 9.5rem;
+  max-height: 9.5rem;
   //min-height: 3.5rem;
   //max-height: 12.5rem;
-  font-size: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  overflow: hidden;
+
+  .meaning {
+    ${tw`text-gray-70`}
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .desc-title {
+    font-size: 0.75rem;
+    margin-right: 0.25rem;
+    margin-bottom: 0.5rem;
+  }
 `;
 
 const WordDate = styled.span`
@@ -82,10 +96,24 @@ const WordItem = ({ word }: { word: WordModel }) => {
         {useFolderIdFormatter(word.folderId).name}
       </WordHeader>
       <WordSpelling>{word.spelling}</WordSpelling>
-      <WordDesc>{word.meaning}</WordDesc>
+      <WordDesc>
+        <p className="meaning">{word.meaning?.join(', ')}</p>
+        <p>
+          <span className="desc-title text-folder02">발음</span>
+          {word.pronounce}
+        </p>
+        <p>
+          <span className="desc-title text-folder03">예문</span>
+          {word.example}
+        </p>
+        <p>
+          <span className="desc-title text-folder04">동의어</span>
+          {word.synonyms?.join(', ')}
+        </p>
+      </WordDesc>
       <WordDate>
         <span className="created-text">저장한 일시</span>
-        <span className="created-date">{dayjs(word.createdAt).format('YYYY-MM-DD')}</span>
+        <span className="created-date">{dayjs.unix(word.createdAt).format('YYYY-MM-DD')}</span>
       </WordDate>
     </Wrapper>
   );

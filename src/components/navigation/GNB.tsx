@@ -38,7 +38,7 @@ const GNB = ({ userInfo }: any) => {
         {!isFolderDetailPage && <Tabs pathname={pathname} />}
       </div>
       <UserText>
-        {userInfo?.userName || 'UserName'}
+        {userInfo?.userName || '사용자'}
         <span className="text-gray-40 font-normal">님</span>
       </UserText>
     </GNBWrapper>
