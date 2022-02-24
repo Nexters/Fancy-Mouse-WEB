@@ -4,6 +4,7 @@ import { getAuth, GoogleAuthProvider, signInWithRedirect } from 'firebase/auth';
 import styled from '@emotion/styled';
 import tw from 'twin.macro';
 import Image from 'next/image';
+import LoginImg from '@assets/images/LoginImg.png';
 import { Logo } from '@/assets/icons';
 import { useRouter } from 'next/router';
 
@@ -102,7 +103,7 @@ const Login = () => {
             </span>
           </p>
         </div>
-        <Image src={require('@assets/images/LoginImg.png')} />
+        <Image src={LoginImg} alt="로그인" />
       </LoginContainer>
     </Wrapper>
   );
