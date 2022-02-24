@@ -26,5 +26,6 @@ export { default as IcCircleDefault } from './IcCircleDefault';
 export { default as IcCircleHover } from './IcCircleHover';
 export { default as IcToastCom } from './IcToastCom';
 export { default as IcToastError } from './IcToastError';
+export { default as LoginImg } from './LoginImg';
 export { default as Logo } from './Logo';
 export { default as UserImg } from './UserImg';

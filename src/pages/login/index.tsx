@@ -1,11 +1,12 @@
 import React, { useContext, useEffect } from 'react';
-import FancyMouseIcon from '@/assets/icons/FancyMouseIcon';
-import SquareIcon from '@/assets/icons/SquareIcon';
 import GoogleLoginButton from '@/assets/icons/GoogleLoginButton';
 import { getAuth, getRedirectResult, GoogleAuthProvider, signInWithRedirect, UserCredential } from 'firebase/auth';
 import styled from '@emotion/styled';
 import { AuthContext } from '@/contexts/AuthContext';
 import { useRouter } from 'next/router';
+import tw from 'twin.macro';
+import Image from 'next/image';
+import { Logo } from '@/assets/icons';
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -20,18 +21,13 @@ const ContentContainer = styled.div`
   margin: 200px auto 0;
   display: flex;
   flex-direction: column;
+`;
 
-  p {
-    font-size: 48px;
-    font-weight: 400;
-    margin: 0;
-    color: white;
-  }
-
-  p.lime {
-    color: #eaffae;
-    font-weight: 700;
-  }
+const Title = styled.p`
+  ${tw`text-gray-40`}
+  font-size: 3rem;
+  margin: 0;
+  line-height: 4.5rem;
 `;
 
 const LoginContainer = styled.div`
@@ -49,18 +45,19 @@ const LoginContainer = styled.div`
   }
 
   p {
-    color: white;
+    ${tw`text-gray-50`}
     font-size: 14px;
     font-weight: 400;
     margin-left: 8px;
   }
 
   p.first-sentense {
-    margin-top: 16px;
+    ${tw`text-gray-50`}
+    margin-top: 1rem;
   }
 
   span {
-    color: #eaffae;
+    ${tw`text-secondary`}
   }
 `;
 
@@ -71,7 +68,6 @@ const Login = () => {
 
   const googleLoginHandler = async (e) => {
     e.preventDefault();
-    console.log('google');
     const provider = new GoogleAuthProvider();
     await signInWithRedirect(auth, provider).catch((error) => {
       // Handle Errors here.
@@ -103,13 +99,15 @@ const Login = () => {
   return (
     <Wrapper>
       <ContentContainer>
-        <FancyMouseIcon />
-        <p>마우스로 만드는 나만의 단어장.</p>
-        <p className="lime">시작해 볼까요?</p>
+        <Logo />
+        <Title>
+          마우스로 만드는 나만의 단어장.
+          <span className="text-secondary font-bold block">시작해 볼까요?</span>
+        </Title>
       </ContentContainer>
       <LoginContainer>
         <div className="google-login">
-          <GoogleLoginButton onClick={googleLoginHandler} />
+          <GoogleLoginButton onClick={googleLoginHandler} className="mr-14" />
           <p className="first-sentense">
             슥 드래그하면 영단어가 번역되는{' '}
             <span>
@@ -123,7 +121,7 @@ const Login = () => {
             </span>
           </p>
         </div>
-        <SquareIcon />
+        <Image src={require('@assets/images/LoginImg.png')} />
       </LoginContainer>
     </Wrapper>
   );
